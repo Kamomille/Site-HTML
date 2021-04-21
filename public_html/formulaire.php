@@ -7,10 +7,11 @@
     if (empty($_POST['mot_de_passe'])) {
         echo "<script>alert(\"Mot de passe vide\")</script>";  
     }
-    
         
     if (isset($_POST['mot_de_passe']) AND $_POST['mot_de_passe'] ==  "pinpin") {
-        echo "<script>alert(\"Mot de passe correct\")</script>";
+        //echo "<script>alert(\"Mot de passe correct\")</script>";
+        header("Location:http://localhost/projetSite_HTML/public_html/menu_salarie.html");
+        
     }
     else{
         echo "<script>alert(\"Votre mot de passe est incorrect\")</script>";
@@ -29,7 +30,7 @@
     <body>
         <header>
             <figure>
-                <img src="logo_esme.png"/>
+                <img src="image\logo_esme.png"/>
             </figure>
             </br>
             Formulaire d'identification

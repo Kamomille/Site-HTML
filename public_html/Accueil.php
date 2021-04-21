@@ -16,7 +16,7 @@ and open the template in the editor.ddd
         
         <header>
             <figure>
-                <img src="\image\logo_esme.png"/>
+                <img src="image\logo_esme.png"/>
             </figure>
             </br>
             Accueillll
