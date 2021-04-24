@@ -9,7 +9,6 @@ $dbName="compagnieaerienne";
 
 try{
     $database = new PDO("mysql:host=$dbServerName;dbname=$dbName",$dbUsername,$dbPassword);
-    echo 'oui';
     
 } catch (PDOException $e) {
     echo 'error';
