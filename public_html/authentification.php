@@ -32,7 +32,7 @@
         $_SESSION['adresse']=$res[0]['adresse'] ;
         $_SESSION['age']=$res[0]['age'] ;
         echo $_SESSION['situationFamiliale'];
-        header("Location:http://localhost/projetSite_HTML/public_html/gestionProfil.php");
+        header("Location:http://localhost/projetSite_HTML/public_html/menu.html");
         
         
     }
