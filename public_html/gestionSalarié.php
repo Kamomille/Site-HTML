@@ -9,7 +9,6 @@
         foreach ($_POST as $key => $val){
             if($val=='supprimer'){
                 $check=true;
-                
             }
             break;
         }
