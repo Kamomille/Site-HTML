@@ -1,6 +1,34 @@
 <!DOCTYPE html>
  <?php
     include 'database.php';
+    print_r($_POST);
+    $check=false;
+    
+    if ($_POST!=NULL){
+        
+        foreach ($_POST as $key => $val){
+            if($val=='supprimer'){
+                $check=true;
+            }
+            break;
+
+        }
+        if ($check==true){
+            foreach ($_POST as $key => $val){
+                mysqli_query($connect,"DELETE FROM authentification WHERE id=$key");   
+            }
+        }
+        else {
+            $id=intval($_POST['id']);
+            foreach ($_POST as $key => $val){
+                if ($val!=NULL){
+                    mysqli_query($connect,"UPDATE authentification SET $key='$val' where id=$id");
+                }
+                
+            }
+            
+        }
+    }
  ?>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -19,7 +47,7 @@ and open the template in the editor.
     ?>
         <table border="1">
             <tr>
-                <td></td>
+                <td>Sélection</td>
                 <td>Adresse mail</td>
                 <td>Nom</td>
                 <td>Prénom</td>
@@ -29,20 +57,22 @@ and open the template in the editor.
                 <td>Suppression</td>
             </tr>
 <?php
-            foreach($res as $personne){
-                echo '<form action="gestionSalarié.php">';
-                echo '<tr>';
-                echo '<td><input type="checkbox" name="selection" id="$personne[0]"value="$personne[0]"/></td>';
-                for($i=1;$i<sizeof($personne);$i++){
-                    echo"<td>$personne[$i]</td>";
-                }
-                echo"<td><input type='submit' name=modification value='modification'></td>";
-                echo"<td><input type='submit' name=supprimer value='supprimer'></td>";
-                echo '</tr>';
-                echo '</form>';
+            echo '<form action="gestionSalarié.php" method="post">';
+                foreach($res as $personne){
+                
+                    echo '<tr>';
+                        echo "<td><input type='checkbox' name='$personne[0]' value='$personne[0]'</td>";
+                        for($i=1;$i<sizeof($personne);$i++){
+                            echo "<td>$personne[$i]</td>";
+                        }
+                        echo"<td><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_modifier_ajouter.php?id=$personne[0]'>Modifier</a></td>";
+                        echo"<td><input type='submit' value='supprimer' name='$personne[0]'></td>";
+                    echo '</tr>';
             }
-            print_r($_POST)
-            
+            echo '<tr>';
+            echo"<td><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_modifier_ajouter.php'>Ajouter</a></td>";
+            echo '</tr>';
+            echo '</form>';
 ?>
 
     
