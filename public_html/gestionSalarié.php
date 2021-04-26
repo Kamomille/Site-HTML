@@ -19,6 +19,7 @@ and open the template in the editor.
     ?>
         <table border="1">
             <tr>
+                <td></td>
                 <td>Adresse mail</td>
                 <td>Nom</td>
                 <td>Prénom</td>
@@ -29,15 +30,18 @@ and open the template in the editor.
             </tr>
 <?php
             foreach($res as $personne){
+                echo '<form action="gestionSalarié.php">';
                 echo '<tr>';
-                echo '<td><input type="radio" name="selection" id="$personne[0]"/></td>';
+                echo '<td><input type="checkbox" name="selection" id="$personne[0]"value="$personne[0]"/></td>';
                 for($i=1;$i<sizeof($personne);$i++){
                     echo"<td>$personne[$i]</td>";
                 }
-                echo"<td><a href=modification.php>Modification</a></td>";
-                echo"<td><a href=suppression.php>Supression</a></td>";
+                echo"<td><input type='submit' name=modification value='modification'></td>";
+                echo"<td><input type='submit' name=supprimer value='supprimer'></td>";
                 echo '</tr>';
+                echo '</form>';
             }
+            print_r($_POST)
             
 ?>
 
