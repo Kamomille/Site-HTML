@@ -14,8 +14,8 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-    $res = $database-> query("SELECT mail,nom,prenom,fonction,contrat FROM authentification;");
-    $res =$res->fetchall();
+    $res = mysqli_query($connect,"SELECT id,mail,nom,prenom,fonction,contrat FROM authentification;");
+    $res = mysqli_fetch_all($res);
     ?>
         <table border="1">
             <tr>
@@ -30,7 +30,8 @@ and open the template in the editor.
 <?php
             foreach($res as $personne){
                 echo '<tr>';
-                for($i=0;$i<sizeof($personne)/2;$i++){
+                echo '<td><input type="radio" name="selection" id="$personne[0]"/></td>';
+                for($i=1;$i<sizeof($personne);$i++){
                     echo"<td>$personne[$i]</td>";
                 }
                 echo"<td><a href=modification.php>Modification</a></td>";

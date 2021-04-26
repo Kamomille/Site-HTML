@@ -15,7 +15,6 @@
     */
     $res = mysqli_query($connect,"SELECT * FROM authentification where (identifiant='$identifiant' AND mdp='$mdp');");
     $res = mysqli_fetch_all($res);
-    print_r($res);
     $count=sizeof($res);
     
     if ($count!=0) {
