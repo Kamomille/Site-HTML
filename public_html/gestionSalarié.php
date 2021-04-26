@@ -3,21 +3,23 @@
     include 'database.php';
     print_r($_POST);
     $check=false;
-    
+    echo "true";
     if ($_POST!=NULL){
         
         foreach ($_POST as $key => $val){
             if($val=='supprimer'){
                 $check=true;
+                
             }
             break;
-
         }
-        if ($check==true){
+        
+        if ($check=true){
             foreach ($_POST as $key => $val){
                 mysqli_query($connect,"DELETE FROM authentification WHERE id=$key");   
             }
         }
+        
         else {
             $id=intval($_POST['id']);
             foreach ($_POST as $key => $val){
