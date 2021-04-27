@@ -6,6 +6,7 @@
     
     $mdp=$_POST['mot_de_passe'];
     $identifiant=$_POST['login'];
+    $idRadio=$_POST['idRadio'];
     
     /*
     if (empty($mdp)) {
@@ -31,7 +32,8 @@
         $_SESSION['adresse']=$res[0][9] ;
         $_SESSION['age']=$res[0][10] ;
         $_SESSION['fonction']=$res[0][11];
-        header("Location:http://localhost/projetSite_HTML/public_html/menu.html");
+        $_SESSION['role']=$idRadio;
+        header("Location:http://localhost/projetSite_HTML/public_html/menu.php");
         
         
     }

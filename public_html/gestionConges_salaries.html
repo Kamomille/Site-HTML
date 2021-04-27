@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Formulaire pour ajouter une demande de congé</title>
+        <meta charset="UTF-8">
+        <meta name="Cédric Chhunon et Camille Bayon de Noyer" content="width=device-width, initial-scale=1.0">
+        <link href="formulaire.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <header>
+            <figure>
+                <img src="image\logo_esme.png"/>
+            </figure>
+            </br>
+            Demande de congé
+        </header>
+        <br>
+        <!-- -------------------------Formulaire---------------------------- -->
+        
+        <form method="post" action="authentification.php">
+       
+        <fieldset>
+                <legend>Demande de congé</legend> 
+                <table>
+                <tr> 
+                    <td><label for="login">Nom :</label></td>
+                    <td><input type="text" id="fname" name="login" required></td>
+                <tr>
+                <tr> 
+                    <td><label for="login">Prénom :</label></td>
+                    <td><input type="text" id="fname" name="login" required></td>
+                <tr>
+                </tr>
+                    <td><label for="mdp">Login :</label></td>
+                    <td><input type="text" name="login" required/></td>
+                </tr>   
+                <tr>
+                    <td><label for="idRadio">Type de congé  :</label></td>
+                    <td><label for="idRadio">Congé payé :</label>
+                        <input type="radio" name="RadioBouton" id="idRadio" value="valeurRadio" required/>
+                        <label for="idRadio2">RTT</label>
+                        <input type="radio" name="RadioBouton" id="idRadio2" value="valeurRadio2" required/> </br></br></td>
+                </tr>
+                <tr> 
+                    <td><label for="start">Date de demande de congé :</label></td>
+                    <td><input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2028-12-31" ></td>
+                <tr>
+                <tr> 
+                    <td><label for="start">Date de début de congé :</label></td>
+                    <td><input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2028-12-31" ></td>
+                <tr>
+                <tr> 
+                    <td><label for="start">Date de demande de congé :</label></td>
+                    <td><input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2028-12-31" ></td>
+                <tr>
+                <tr> 
+                    <td><label for="login">Date de fin de congé :</label></td>
+                    <td><input type="text" id="fname" name="login" required></td>
+                <tr>
+                   
+                <tr>
+                    <td><input type="submit" value="Valider" name="submit" /></td>
+                </tr>    
+                
+                </table>
+            </fieldset>
+    </body>
+</html>
