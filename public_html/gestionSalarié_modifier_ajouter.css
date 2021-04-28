@@ -1,0 +1,50 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 1 mars 2021, 19:51:11
+    Author     : cedric
+*/
+body{
+    
+}
+
+div{
+    align-content: center;
+    margin: 100px;
+    border: thick ridge gray;
+    margin-right: 10px;
+
+}
+label{
+    margin: 20px;
+}
+input[type=text]{
+    border: none;
+    width:20vw;
+}
+
+input:hover{
+    background-color: lightgray;
+}
+input.submit:hover{
+    background-color: greenyellow;
+}
+
+textarea{
+    margin: 10px;
+    width: 300px;
+    height: 150px;
+}
+input.submit{
+    background-color: lightgrey;
+    margin: 20px;
+    width: 150px;
+    height: 50px;
+}
+h2{
+    text-decoration: underline;
+    margin: 20px;
+}

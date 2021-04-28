@@ -43,7 +43,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-    $res = mysqli_query($connect,"SELECT id,mail,nom,prenom,fonction,contrat FROM authentification;");
+    $res = mysqli_query($connect,"SELECT id,mail,nom,prenom,fonction,contrat,contratDurée_mois,embauche,congésRTT,congésPayés FROM authentification;");
     $res = mysqli_fetch_all($res);
     ?>
         <table border="1">
@@ -54,6 +54,10 @@ and open the template in the editor.
                 <td>Prénom</td>
                 <td>Fonction</td>
                 <td>Type Contrat</td>
+                <td>Durée du contrat(mois)</td>
+                <td>date d'embauche</td>
+                <td>Congés RTT</td>
+                <td>Congés payés</td>
                 <td>Modification</td>
                 <td>Suppression</td>
             </tr>
@@ -71,7 +75,7 @@ and open the template in the editor.
                     echo '</tr>';
             }
             echo '<tr>';
-            echo"<td><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_modifier_ajouter.php'>Ajouter</a></td>";
+            echo"<td><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_modifier_ajouter.php?id=0'>Ajouter</a></td>";
             echo '</tr>';
             echo '</form>';
 ?>
