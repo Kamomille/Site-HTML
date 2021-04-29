@@ -35,6 +35,12 @@ var_dump($_SESSION)?>
                 </br><label>___________________________________________________________</label>
 
                 <br><br>
+                
+                <label><strong>Mail</strong> </label>
+                <?php echo $_SESSION['mail'] ?>
+                </br><label>___________________________________________________________</label>
+
+                <br><br>
 
                 <label><strong>Objet</strong> </label>
                 <input type="text" name="objet"  placeholder="Objet" required/>
