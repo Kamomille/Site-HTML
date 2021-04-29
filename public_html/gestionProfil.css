@@ -1,0 +1,68 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 28 mars 2021, 11:54:00
+    Author     : cedric
+*/
+
+
+img.esme{
+  max-width:150px;
+  max-height:70px;
+  min-width:150px;
+  min-height:70px;
+
+}
+header{
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    background-color: white;
+}
+p.titre{
+    margin-left: 50px;
+}
+
+nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top:0;
+    font-size: 20px;
+    background-color: #161616;
+    opacity: 0.60;
+    padding-left: 200px;
+    margin:0; 
+}
+a{
+    text-align: center;
+    width: 200px;
+    background: none;
+    height: max-content;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    text-decoration: initial;
+    color: white;
+}
+
+.mainLayout{
+    background-color: grey;
+}
+
+
+table{
+    margin-left: 30vw;
+    margin-right: 30vw;
+    margin-top: 20vh;
+    margin-bottom: 20vh;
+    font-size: 20px;
+    background-color: white;
+}
+td{
+    padding: 30px;
+}
+

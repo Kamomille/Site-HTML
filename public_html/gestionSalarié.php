@@ -1,9 +1,8 @@
 <!DOCTYPE html>
  <?php
     include 'database.php';
-    print_r($_POST);
     $check=false;
-    echo "true";
+
     if ($_POST!=NULL){
         
         foreach ($_POST as $key => $val){
@@ -77,11 +76,9 @@ and open the template in the editor.
             echo '<tr>';
             echo"<td><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_modifier_ajouter.php?id=0'>Ajouter</a></td>";
             echo '</tr>';
-            echo '</form>';
+        echo '</table>';
+    echo '</form>';
 ?>
-
-    
-        </table>
 
     </body>
 </html>
