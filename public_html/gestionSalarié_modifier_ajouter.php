@@ -35,7 +35,6 @@ if ($erreur!=""){
             $res = mysqli_query($connect,"SELECT nom,prenom,nationalite,adresse,age,sexe,situationFamiliale,tel,contrat,contratDurée_mois,id FROM authentification where id=$id;");
             $res = mysqli_fetch_all($res);
             $res=$res[0];
-            var_dump($res);
             echo $res[9];
         
         
@@ -78,7 +77,7 @@ if ($erreur!=""){
                 ."<label for='idsexe'>homme </label>"
                 ."<input type='radio' name='sexe' value='femme' />"
                 ."<label for='idsexe'>femme </label>"
-                ."<input type='radio' name='autre' checked />"
+                ."<input type='radio' name='sexe' value='autre' checked />"
                 ."<label for='idsexe'>autre</label>"
                 
                 .'<br><br>'
