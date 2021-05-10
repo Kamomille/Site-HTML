@@ -2,14 +2,19 @@
 
 include 'database.php';
 
-echo $_POST['mois'];
+        
+if ($_POST['ok']){ 
+    $date =$_POST['mois'];
+    echo $date;
+    header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php?date=$date");
+}
 
 if($connect) {
     
     $req = 'SELECT id FROM congé';
     $resultat = mysqli_query($connect, $req);
     if($resultat == false) echo "Echec de l'exécution de la requête";
-
+   
     else{
         $compt = 0;
         while($ligne = mysqli_fetch_row($resultat)){
