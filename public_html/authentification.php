@@ -8,17 +8,12 @@
     $identifiant=$_POST['login'];
     $idRadio=$_POST['idRadio'];
     
-    /*
-    if (empty($mdp)) {
-        echo "<script>alert(\"Mot de passe vide\")</script>";  
-    }
-    
-    */
+
     $res = mysqli_query($connect,"SELECT * FROM authentification where (identifiant='$identifiant' AND mdp='$mdp');");
     $res = mysqli_fetch_all($res);
     $count=sizeof($res);
     
-    if ($count!=0) {
+    if ($count!=0 && strcmp(authentification($mdp,$identifiant), 'FAUX') != 0) {
         session_start();
         $_SESSION['id']=$res[0][0];
         $_SESSION['identifiant']=$res[0][1]; 
@@ -38,11 +33,41 @@
         
     }
     else{
-        echo "<script>alert(\"Votre mot de passe est incorrect\")</script>";
+        echo "<script>alert(\"Incorrect\")</script>";
 
     }
     
     
+    
+function authentification($mdp,$identifiant){
+    include 'database.php';
+    if($connect) {
+        $req = 'SELECT identifiant, mdp, fonction FROM authentification';
+        $resultat = mysqli_query($connect, $req);
+        if($resultat == false) echo "Echec de l'exécution de la requête";
+
+        else{
+            $return = 'FAUX';
+            while($ligne = mysqli_fetch_row($resultat)){
+                if ($mdp==$ligne[1] && $identifiant==$ligne[0]){
+                    if (strcmp($_POST['idRadio'], 'Directeur') == 0 && strcmp($ligne[2], "directeur")==0){
+                        $return='directeur';
+                        break;
+                    }
+                    if (strcmp($_POST['idRadio'], 'Salarié') == 0 && strcmp($ligne[2], "enseignant")==0){
+                        $return='salarié';
+                        break;
+                    }
+                    if (strcmp($_POST['idRadio'], 'Salarié') == 0 && strcmp($ligne[2],"administration")==0){
+                        $return='salarié';
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    return $return;
+}
 
     
 ?>
