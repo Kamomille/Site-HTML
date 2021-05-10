@@ -1,5 +1,6 @@
 <!DOCTYPE html>
- <?php
+<?php
+    session_start();
     include 'database.php';
     $check=false;
 
@@ -12,7 +13,7 @@
             break;
         }
         
-        if ($check=true){
+        if ($check==true){
             foreach ($_POST as $key => $val){
                 mysqli_query($connect,"DELETE FROM authentification WHERE id=$key");   
             }
@@ -29,7 +30,7 @@
             
         }
     }
- ?>
+?>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -57,8 +58,12 @@ and open the template in the editor.
                 <td>date d'embauche</td>
                 <td>Congés RTT</td>
                 <td>Congés payés</td>
-                <td>Modification</td>
-                <td>Suppression</td>
+<?php
+                if ($_SESSION['role']=='Directeur'){
+                    echo "<td>Modification</td>"
+                    ."<td>Suppression</td>";
+                }
+?>
             </tr>
 <?php
             echo '<form action="gestionSalarié.php" method="post">';
@@ -69,13 +74,18 @@ and open the template in the editor.
                         for($i=1;$i<sizeof($personne);$i++){
                             echo "<td>$personne[$i]</td>";
                         }
-                        echo"<td><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_modifier_ajouter.php?id=$personne[0]'>Modifier</a></td>";
-                        echo"<td><input type='submit' value='supprimer' name='$personne[0]'></td>";
+                        if ($_SESSION['role']=='Directeur'){
+                            echo"<td><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_modifier_ajouter.php?id=$personne[0]'>Modifier</a></td>";
+                            echo"<td><input type='submit' value='supprimer' name='$personne[0]'></td>";
+                        }
                     echo '</tr>';
             }
-            echo '<tr>';
-            echo"<td><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_modifier_ajouter.php?id=0'>Ajouter</a></td>";
-            echo '</tr>';
+            if ($_SESSION['role']=='Directeur'){
+                echo '<tr>';
+                echo"<td><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_modifier_ajouter.php?id=0'>Ajouter</a></td>";
+                echo '</tr>';
+            }
+
         echo '</table>';
     echo '</form>';
 ?>

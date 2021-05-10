@@ -38,7 +38,7 @@ nav{
     padding-left: 200px;
     margin:0; 
 }
-a{
+a.nav{
     text-align: center;
     width: 200px;
     background: none;
@@ -60,7 +60,7 @@ table{
     margin-top: 20vh;
     margin-bottom: 20vh;
     font-size: 20px;
-    background-color: white;
+    background-color: black;
 }
 td{
     padding: 30px;

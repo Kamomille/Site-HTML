@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <?php 
 session_start();
-var_dump($_SESSION)?>
+var_dump($_GET)?>
 <html>
     <head>
         <title>TODO supply a title</title>
@@ -43,7 +43,7 @@ var_dump($_SESSION)?>
                 <br><br>
 
                 <label><strong>Objet</strong> </label>
-                <input type="text" name="objet"  placeholder="Objet" required/>
+                <input type="text" name="objet"  placeholder="Objet" value="<?php if ($_GET!=null) echo "RE: ".$_GET['objet']?>" required/>
                 </br><label>___________________________________________________________</label>
 
                 <br><br>

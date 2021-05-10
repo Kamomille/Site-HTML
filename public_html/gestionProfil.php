@@ -12,7 +12,7 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="gestionProfil.css">
+        <!--<link rel="stylesheet" href="gestionProfil.css"> -->
     </head>
     <body>
         <header>
@@ -20,8 +20,8 @@ and open the template in the editor.
             <h1 class="titre">Gestion de congé</h1>
         </header>
         <nav>
-            <a href="contact.html">Contactez-nous</a>
-            <a href="particulier.html">Particuliers</a> 
+            <a class='nav' href="contact.html">Contactez-nous</a>
+            <a class="nav" href="particulier.html">Particuliers</a> 
         </nav>
         <div class="mainLayout">
             <h1>nom prenom - Informations personnelles</h1>
@@ -58,7 +58,12 @@ and open the template in the editor.
                     <td>âge</td> 
                     <td>$_SESSION['age']</td>
                 </tr>
+                <tr>
+                   <?php 
+                   $id=$_SESSION['id'];
+                   echo "<td><a href=\"http://localhost/projetSite_HTML/public_html/gestionSalari%C3%A9_modifier_ajouter.php?id=$id\" >Modifier ses informations</a></td>"; ?>
 
+                </tr>
             </table>
         </div>
                 

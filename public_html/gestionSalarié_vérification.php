@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'database.php';
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -96,6 +97,21 @@ else {
 
     }
     mysqli_query($connect,$sql);
+    var_dump($_GET);
+    if($_GET['pageprofil']==True){
+        $_SESSION['pageprofil']=False;
+         
+        $_SESSION['nom']=$nom ;
+        $_SESSION['prenom']=$prenom; 
+        $_SESSION['tel']=$tel ;
+        $_SESSION['situationFamiliale']=$situationFamiliale ;
+        $_SESSION['nationalite']=$nationalite;
+        $_SESSION['adresse']=$adresse ;
+        $_SESSION['age']=$age;
+    }
+ 
     header("Location:http://localhost/projetSite_HTML/public_html/gestionSalarié.php");
+    
+    
 }
 ?>

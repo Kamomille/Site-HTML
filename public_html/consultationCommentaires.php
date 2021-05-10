@@ -1,4 +1,5 @@
  <?php
+ session_start();
     include 'database.php';
     $check=false;
 
@@ -31,35 +32,83 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-    $sql="SELECT commentaire.id,nom,prenom,objet,message FROM commentaire JOIN authentification on authentification.id=personne ORDER BY commentaire.id DESC;";
-    $res = mysqli_query($connect,$sql);
-    $res = mysqli_fetch_all($res);
-    var_dump($res);
-    ?>
-        <table border="1">
-            <tr>
-                <td>Sélection</td>
-                <td>Autheur</td>
-                <td>Objet</td>
-                <td>Message</td>
+    if ($_SESSION['role']=="Salarié"){
+        $id=$_SESSION['id'];
+        $sql="SELECT commentaire.id,personne,nom,prenom,mail,objet,message FROM commentaire JOIN authentification on authentification.id=personne WHERE authentification.id=$id ORDER BY commentaire.id DESC;";
+        $res = mysqli_query($connect,$sql);
+   
+        if (mysqli_num_rows($res)>0){
+            $res = mysqli_fetch_all($res);
+            
+            echo '<table border="1">'
+                .'<tr>'
+                    .'<td>Sélection</td>'
+                    .'<td>Id</td>'
+                    .'<td>Prénom</td>'
+                    .'<td>Nom</td>'
+                    .'<td>Mail</td>'
+                    .'<td>Objet</td>'
+                    .'<td>Message</td>'
+                    .'<td>Supprimer</td>'
+                    .'<td>Répondre</td>'
+                .'</tr>';
 
-                <td>Suppression</td>
-            </tr>
-<?php
+                echo '<form action="consultationCommentaires.php" method="post">';
+                    foreach($res as $commentaire){
 
-            echo '<form action="consultationCommentaires.php" method="post">';
-                foreach($res as $commentaire){
-                
-                    echo '<tr>';
-                        echo "<td><input type='checkbox' name='$commentaire[0]' value='$commentaire[0]'</td>";
-                        for($i=1;$i<sizeof($commentaire);$i++){
-                            echo "<td>$commentaire[$i]</td>";
-                        }
-                        echo"<td><input type='submit' value='supprimer' name='$commentaire[0]'></td>";
-                    echo '</tr>';
-            }
-        echo '</table>';
-    echo '</form>';
+                        echo '<tr>';
+                            echo "<td><input type='checkbox' name='$commentaire[0]' value='$commentaire[0]'</td>";
+                            for($i=1;$i<sizeof($commentaire);$i++){
+                                echo "<td>$commentaire[$i]</td>";
+                            }
+                            echo"<td><input type='submit' value='supprimer' name='$commentaire[0]'></td>";
+                            echo"<td><input type='submit' value='répondre' name='$commentaire[0]'></td>";
+                        echo '</tr>';
+                }
+            echo '</table>';
+            echo '</form>';
+        }
+    }
+        
+    else {
+
+       $sql="SELECT commentaire.id,personne,nom,prenom,mail,objet,message FROM commentaire JOIN authentification on authentification.id=personne ORDER BY commentaire.id DESC;";
+       $res = mysqli_query($connect,$sql);
+
+       if (mysqli_num_rows($res)>0){
+
+       $res = mysqli_fetch_all($res);
+
+
+       echo '<table border="1">'
+           .'<tr>'
+               .'<td>Sélection</td>'
+               .'<td>Id</td>'
+               .'<td>Prénom</td>'
+               .'<td>Nom</td>'
+               .'<td>Mail</td>'
+               .'<td>Objet</td>'
+               .'<td>Message</td>'
+               .'<td>Supprimer</td>'
+               .'<td>Répondre</td>'
+           .'</tr>';
+
+           echo '<form action="consultationCommentaires.php" method="post">';
+               foreach($res as $commentaire){
+
+                   echo '<tr>';
+                       echo "<td><input type='checkbox' name='$commentaire[0]' value='$commentaire[0]'</td>";
+                       for($i=1;$i<sizeof($commentaire);$i++){
+                           echo "<td>$commentaire[$i]</td>";
+                       }
+                       echo"<td><input type='submit' value='supprimer' name='$commentaire[0]'></td>";
+                       echo"<td><a href='http://localhost/projetSite_HTML/public_html/contact.php?objet=$commentaire[5]'>Répondre</a></td>";
+                   echo '</tr>';
+               }
+           echo '</table>';
+           echo '</form>';  
+       }
+    }
 ?>
     </body>
 </html>
