@@ -32,58 +32,56 @@ if ($erreur!=""){
  <?php       
         if ($_GET['id']!=0 && $_GET['id']!=NULL){
            $id=intval($_GET['id']);
-            $res = mysqli_query($connect,"SELECT nom,prenom,nationalite,adresse,age,sexe,situationFamiliale,tel,contrat,contratDurée_mois,id FROM authentification where id=$id;");
-            $res = mysqli_fetch_all($res);
-            $res=$res[0];
-            echo $res[9];
-        
+           $req="SELECT nom,prenom,nationalite,adresse,age,sexe,situationFamiliale,tel,contrat,contratDuree_mois,id FROM authentification where id=?;";
+           $res= mysqli_prepare($connect, $req);
+           $var= mysqli_stmt_bind_param($res,'i',$id);
+           $var= mysqli_execute($res); 
+           $var = mysqli_stmt_bind_result($res,$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$id);
+           mysqli_stmt_fetch($res);
+           mysqli_stmt_close($res);
+           $adresse= explode(",", $adresse);
         
         echo "<form method='post' action='gestionSalarié_vérification.php'>"
             ."<div class='EtatCivil'>"
                ." <h2>Etat civil</h2>"
                 
                 ."<label><strong>Nom</strong> </label>"
-                ."<input type='text' name='nom' id='idtextnom' placeholder='Mon nom' value=$res[0] required>"
+                ."<input type='text' name='nom' id='idtextnom' placeholder='Mon nom' value=$nom required>"
                 ."</br><label for='idLine'>___________________________________________________________</label>"
                 
                 ."<br><br>"
                 
                 ."<label><strong>Prénom</strong> </label>"
-                ."<input type='text' name='prenom' id='idtextprénom' placeholder='Mon prénom' value=$res[1] required>"
+                ."<input type='text' name='prenom' id='idtextprénom' placeholder='Mon prénom' value=$prenom required>"
                 ."</br><label for='idLine'>___________________________________________________________</label>"
                 
                 ."<br><br>"    
                 
                 ."<label><strong>Nationalité</strong> </label>"
-                ."<input type='text' name='nationalite' id='idnationalité' placeholder='Ma nationalité' value=$res[2]>"
+                ."<input type='text' name='nationalite' id='idnationalité' placeholder='Ma nationalité' value=$nationalite >"
                 ."</br><label for='idLine'>___________________________________________________________</label>"
                 
-                ."<br><br>"   
-
-                ."<label><strong>Adresse</strong> </label>"
-                ."<input type='text' name='adresse' placeholder='Mon adresse' value=$res[3] >"  
-                ."</br><label for='idLine'>___________________________________________________________</label>"
                 
                 .'<br><br>' 
                     
                 ."<label ><strong>Age</strong> </label>"
-                ."<input type='text' name='age' id='idage' placeholder='Mon age' value=$res[4]>"  
+                ."<input type='text' name='age' id='idage' placeholder='Mon age' value=$age >"  
                 ."</br><label for='idLine'>___________________________________________________________</label>"
                 
                 .'<br><br>' 
                 
-                ."<label for='idsexe'><strong>sexe</strong> </label>"
-                ."<input type='radio' name='sexe' value=$res[5] />"
+                ."<label for='idsexe' ><strong>sexe</strong> </label>"
+                ."<input type='radio' name='sexe' value=$sexe />"
                 ."<label for='idsexe'>homme </label>"
                 ."<input type='radio' name='sexe' value='femme' />"
                 ."<label for='idsexe'>femme </label>"
-                ."<input type='radio' name='sexe' value='autre' checked />"
+                ."<input type='radio' name='sexe' value='autre'checked/>"
                 ."<label for='idsexe'>autre</label>"
                 
                 .'<br><br>'
                 
                 ."<label><strong>situation familiale</strong></label>"
-                ."<select name='situationFamiliale' value=$res[6]>"
+                ."<select name='situationFamiliale' value=$situationFamiliale >"
                     ."<option value=''></option>"
                     ."<option value='pacsé'>pacsé</option>"
                     ."<option value='marié'>marié</option>"
@@ -99,7 +97,20 @@ if ($erreur!=""){
                 ."<h2>Contact</h2>"
                 
                 ."<label for='idtéléphone'><strong>Téléphone</strong> </label>"
-                ."<input type='text' name='telephone' id='idTéléphone' placeholder='Mon numéro de téléphone' value=$res[7] required>"
+                ."<input type='phone' name='telephone' id='idTéléphone' placeholder='Mon numéro de téléphone' value=$tel required>"
+                ."</br><label for='idLine'>___________________________________________________________</label>"
+
+                ."<br><br>"   
+
+                ."<label><strong>Adresse postale</strong> </label>"
+                ."</br></br><label><strong>Code postale</strong> </label>"
+                ."<input type='text' name='codePostal' placeholder='94200' value=$adresse[0]  >"  
+                ."</br><label for='idLine'>___________________________________________________________</label>"
+                ."</br><label><strong>Ville</strong> </label>"
+                ."<input type='text' name='Ville' placeholder='Ivry' value=$adresse[1]  >"  
+                ."</br><label for='idLine'>___________________________________________________________</label>"
+                ."</br><label><strong>Rue</strong> </label>"
+                ."<input type='text' name='Rue' placeholder='18 rue Molière' value=$adresse[2]  >"  
                 ."</br><label for='idLine'>___________________________________________________________</label>"
                 
                 ."<br><br>"
@@ -111,18 +122,24 @@ if ($erreur!=""){
                 ."<label><strong>Contrat</strong></label>"
                 ."<br><br>"
                 
-                ."<label for='idcontrat' ><strong>Type de contrat</strong> </label>"
-                ."<input type='text' name='contrat' id='idcontrat' placeholder='Mon contrat' value='$res[8]' >"
-                ."<input type='text' name='contratDurée_mois' id='idcontrat' placeholder='Durée du contrat' value='$res[9]'>"
+
+                .'<label id=contrat ><strong>Type de contrat</strong> </label>'
+                .'<input type="radio" name="contrat" value="CDD" />'
+                .'<label for="idsexe">CDD </label>'
+                .'<input type="radio" name="contrat" value="CDI" />'
+                .'<label for="idsexe">CDI </label></br></br>'
+                .'</br></br>'
+                .'<label id=contrat ><strong>Durée du contrat en mois(0 si CDI)</strong> </label>'
+                ."<input type='text' name='contratDuree_mois' id='idcontrat' placeholder='Durée du contrat' value='$contratDuree_mois' >"
                 ."</br><label for='idLine'>___________________________________________________________</label>"
-                
+        
                 ."<br><br>"
                 
                 
             .'</div>'
             .'<div>'
 
-                ."<input type='submit' name='$res[10]'  id='idsubmit' class='submit'/>"
+                ."<input type='submit' name='$id'  id='idsubmit' class='submit'/>"
             .'</div>'
         .'</form>';
         
@@ -147,7 +164,7 @@ if ($erreur!=""){
                 .'<br><br>'    
                 
                 .'<label ><strong>Nationalité</strong> </label>'
-                .'<input type="text" name="nationalite" id="idnationalité" placeholder="Ma nationalité"/>'
+                .'<input type="text" name="nationalite" id="idnationalité" placeholder="Ma nationalité" />'
                 .'</br><label for="idLine">___________________________________________________________</label>'
                 
                 .'<br><br>'     
@@ -158,7 +175,7 @@ if ($erreur!=""){
                 
                 ."<br><br>"   
                 
-                .'<label for="idsexe"><strong>sexe</strong> </label>'
+                .'<label for="idsexe" ><strong>sexe</strong> </label>'
                 .'<input type="radio" name="sexe" value="homme" />'
                 .'<label for="idsexe">homme </label>'
                 .'<input type="radio" name="sexe" value="femme" />'
@@ -169,7 +186,7 @@ if ($erreur!=""){
                 ."<br><br>"
                 
                 .'<label><strong>situation familiale</strong></label>'
-                .'<select name="situationFamiliale">'
+                .'<select name="situationFamiliale" >'
                     ."<option value=''></option>"
                     .'<option value="pacsé">pacsé</option>'
                     .'<option value="marié">marié</option>'
@@ -220,7 +237,7 @@ if ($erreur!=""){
                 .'<br><br>'
                 
                 .'<label for="idembauche"><strong>Date d\'embauche</strong></label>'
-                .'<input type="date" name="embauche" id="idembauche" />'   
+                .'<input type="date" name="embauche" id="idembauche"/>'   
                 
                 .'<br><br>'
                 

@@ -15,7 +15,11 @@
         
         if ($check==true){
             foreach ($_POST as $key => $val){
-                mysqli_query($connect,"DELETE FROM authentification WHERE id=$key");   
+                $req="DELETE FROM authentification WHERE id=?";
+                $res= mysqli_prepare($connect, $req);
+                $var= mysqli_stmt_bind_param($res,'s', $key);
+                $var= mysqli_execute($res); 
+                mysqli_stmt_close($res);
             }
         }
         
@@ -23,7 +27,12 @@
             $id=intval($_POST['id']);
             foreach ($_POST as $key => $val){
                 if ($val!=NULL){
-                    mysqli_query($connect,"UPDATE authentification SET $key='$val' where id=$id");
+                    $req="UPDATE authentification SET ?=? where id=?";
+                    $res= mysqli_prepare($connect, $req);
+                    $var= mysqli_stmt_bind_param($res,'ssi', $key,$val,$id);
+                    $var= mysqli_execute($res); 
+                    mysqli_stmt_close($res);
+                    
                 }
                 
             }
@@ -43,9 +52,23 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-    $res = mysqli_query($connect,"SELECT id,mail,nom,prenom,fonction,contrat,contratDurée_mois,embauche,congésRTT,congésPayés FROM authentification;");
-    $res = mysqli_fetch_all($res);
-    ?>
+        
+        $req="SELECT id,identifiant,nom,prenom,fonction,contrat,contratDuree_mois,embauche,congesRTT,congesPayes FROM authentification ;";
+        $result = mysqli_prepare($connect,$req);
+        $var=mysqli_execute($result);
+        mysqli_stmt_bind_result($result,$id,$identifiant,$nom,$prenom,$fonction,$contrat,$contratDuree_mois,$embauche,$congesRTT,$congesPayes);
+        
+        $res=[];
+        while (mysqli_stmt_fetch($result)){
+            $row=[strval($id),$identifiant,$nom,$prenom,$fonction,$contrat, strval($contratDuree_mois),$embauche,strval($congesRTT),strval($congesPayes)];
+            array_push($res,$row);
+            var_dump($row);
+        }
+        
+        mysqli_stmt_close($result);
+        mysqli_close($connect);
+        
+        ?>
         <table border="1">
             <tr>
                 <td>Sélection</td>
@@ -66,23 +89,24 @@ and open the template in the editor.
 ?>
             </tr>
 <?php
+            
             echo '<form action="gestionSalarié.php" method="post">';
                 foreach($res as $personne){
-                
+            
                     echo '<tr>';
                         echo "<td><input type='checkbox' name='$personne[0]' value='$personne[0]'</td>";
                         for($i=1;$i<sizeof($personne);$i++){
                             echo "<td>$personne[$i]</td>";
                         }
                         if ($_SESSION['role']=='Directeur'){
-                            echo"<td><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_modifier_ajouter.php?id=$personne[0]'>Modifier</a></td>";
+                            echo"<td><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_modifier.php?id=$personne[0]'>Modifier</a></td>";
                             echo"<td><input type='submit' value='supprimer' name='$personne[0]'></td>";
                         }
                     echo '</tr>';
             }
             if ($_SESSION['role']=='Directeur'){
                 echo '<tr>';
-                echo"<td><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_modifier_ajouter.php?id=0'>Ajouter</a></td>";
+                echo"<td><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_ajouter.php?id=0'>Ajouter</a></td>";
                 echo '</tr>';
             }
 
