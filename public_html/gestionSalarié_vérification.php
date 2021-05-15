@@ -27,6 +27,7 @@ if (isset($_POST['mdp'])){
     $erreur=$erreur."&mdp=erreur";
     $check=true;   
     }
+    
 }
 else {
     $mdp=$_SESSION['mdp'];    
@@ -73,7 +74,14 @@ else {
         $tel=strval($_POST['telephone']);
         $contrat=strval($_POST['contrat']);
         $contratDuree_mois=intval($_POST['contratDuree_mois']);
-        $fonction=$_SESSION['fonction'];
+        if($_SESSION['role']=="directeur"){
+            $fonction=$_POST['fonction'];
+        }
+        else {
+            $fonction=$_SESSION['fonction'];
+        }
+        
+        $_SESSION['mdp']=$mdp;
         
         $req="UPDATE authentification SET nom=?,prenom=?,nationalite=?,adresse=?,age=?,sexe=?,situationFamiliale=?,tel=?,fonction=?,contrat=?,contratDuree_mois=?,mdp=?  WHERE id=?;";
         $res= mysqli_prepare($connect, $req);
@@ -108,7 +116,7 @@ else {
        $sexe=$_POST['sexe'];
        $situationFamiliale=$_POST['situationFamiliale'];
        $tel=$_POST['telephone'];
-       $fonction=$_SESSION['fonction'];
+       $fonction=$_POST['fonction'];
        $contrat=$_POST['contrat'];
        $contratDuree_mois=$_POST['contratDuree_mois'];
 

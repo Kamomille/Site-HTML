@@ -56,6 +56,7 @@ function authentification($saisie_mdp,$saisie_identifiant){
             session_start();
             $_SESSION['id']=$id;
             $_SESSION['identifiant']=$identifiant;
+            $_SESSION['mdp']=$mdp;
             $_SESSION['role']=$return;
             $_SESSION['fonction']=$fonction;
             mysqli_stmt_close($result);
