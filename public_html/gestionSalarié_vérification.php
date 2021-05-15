@@ -6,10 +6,10 @@ include 'database.php';
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+var_dump($_SESSION);
 $erreur="";
 $check=false;
-
+$page=false;
 foreach ( $_POST as $key => $val)
     if ($val=="Envoyer"){
         $id=$key;
@@ -18,16 +18,26 @@ foreach ( $_POST as $key => $val)
 if (strlen($_POST['nom'])<2){
     $erreur=$erreur."&nom=erreur";
     $check=true;
-    
-    
 }
+
+if (isset($_POST['mdp'])){
+    $page=true;
+    $mdp=$_POST['mdp'];
+    if(!preg_match("#^[A-Z]([a-z A-Z 0-9]){6,}[0-9]$#",$_POST['mdp'])){
+    $erreur=$erreur."&mdp=erreur";
+    $check=true;   
+    }
+}
+else {
+    $mdp=$_SESSION['mdp'];    
+}    
+
 
 if (strlen($_POST['prenom'])<2){
     $erreur=$erreur."&prenom=erreur";
     $check=true;
     
 }
-var_dump($_POST);
 if (!preg_match("#^([0-9]){5}$#",$_POST['codePostal'])){
     $erreur=$erreur."&codePostale=erreur";
     $check=true;
@@ -41,8 +51,14 @@ if (preg_match("#^0[1-9][0-9]{5}$#",$_POST['telephone'] )){
     $check=true;    
 }
 
-if ($check==true){
-    header("Location:http://localhost/projetSite_HTML/public_html/gestionSalarié_modifier_ajouter.php?id=$id"."$erreur");
+if ($check){
+    if($page){
+        header("Location:http://localhost/projetSite_HTML/public_html/gestionProfil_formulaire.php?id=$id"."$erreur");
+    }
+    else {
+        header("Location:http://localhost/projetSite_HTML/public_html/gestionSalarié_ajouter.php?id=$id"."$erreur");
+    }
+    
 }
 else {
     if ($id!=0){
@@ -57,10 +73,11 @@ else {
         $tel=strval($_POST['telephone']);
         $contrat=strval($_POST['contrat']);
         $contratDuree_mois=intval($_POST['contratDuree_mois']);
+        $fonction=$_SESSION['fonction'];
         
-        $req="UPDATE authentification SET nom=?,prenom=?,nationalite=?,adresse=?,age=?,sexe=?,situationFamiliale=?,tel=?,contrat=?,contratDuree_mois=?  WHERE id=?;";
+        $req="UPDATE authentification SET nom=?,prenom=?,nationalite=?,adresse=?,age=?,sexe=?,situationFamiliale=?,tel=?,fonction=?,contrat=?,contratDuree_mois=?,mdp=?  WHERE id=?;";
         $res= mysqli_prepare($connect, $req);
-        $var= mysqli_stmt_bind_param($res,'ssssissssii',$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$id);
+        $var= mysqli_stmt_bind_param($res,'ssssisssssisi',$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$fonction,$contrat,$contratDuree_mois,$mdp,$id);
         $var= mysqli_execute($res);
         mysqli_stmt_close($res);       
         
@@ -91,6 +108,7 @@ else {
        $sexe=$_POST['sexe'];
        $situationFamiliale=$_POST['situationFamiliale'];
        $tel=$_POST['telephone'];
+       $fonction=$_SESSION['fonction'];
        $contrat=$_POST['contrat'];
        $contratDuree_mois=$_POST['contratDuree_mois'];
 
@@ -101,9 +119,14 @@ else {
        $var= mysqli_execute($res);
        mysqli_stmt_close($res);
     }
-
     mysqli_close($connect);
-    header("Location:http://localhost/projetSite_HTML/public_html/gestionSalarié.php");
+    if($page){
+        header("Location:http://localhost/projetSite_HTML/public_html/gestionProfil.php");
+    }
+    else{
+        header("Location:http://localhost/projetSite_HTML/public_html/gestionSalarié.php");
+    }
+    
     
     
 }

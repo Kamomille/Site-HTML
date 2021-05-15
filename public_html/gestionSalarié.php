@@ -53,17 +53,19 @@ and open the template in the editor.
     <body>
         <?php
         
-        $req="SELECT id,identifiant,nom,prenom,fonction,contrat,contratDuree_mois,embauche,congesRTT,congesPayes FROM authentification ;";
+        $req="SELECT id,identifiant,nom,prenom,fonction,contrat,contratDuree_mois,embauche,congesRTT,congesPayes FROM authentification WHERE (fonction='enseignant' OR fonction='administration');";
         $result = mysqli_prepare($connect,$req);
         $var=mysqli_execute($result);
         mysqli_stmt_bind_result($result,$id,$identifiant,$nom,$prenom,$fonction,$contrat,$contratDuree_mois,$embauche,$congesRTT,$congesPayes);
         
         $res=[];
+
         while (mysqli_stmt_fetch($result)){
             $row=[strval($id),$identifiant,$nom,$prenom,$fonction,$contrat, strval($contratDuree_mois),$embauche,strval($congesRTT),strval($congesPayes)];
             array_push($res,$row);
-            var_dump($row);
+    
         }
+        
         
         mysqli_stmt_close($result);
         mysqli_close($connect);

@@ -1,12 +1,7 @@
-<?php 
-    include 'database.php';
+<?php
+include 'database.php';
+session_start();
 ?>
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <?php 
        
 $erreur="";
@@ -18,9 +13,25 @@ if ($erreur!=""){
     echo "<script>alert(\"Les champs $erreur sont incorrectes\")</script>";
 }    
 ?>
-
-
-
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<?php
+        if ($_GET['id']!=0 && $_GET['id']!=NULL){
+           $id=intval($_GET['id']);
+           $req="SELECT nom,prenom,nationalite,adresse,age,sexe,situationFamiliale,tel,contrat,contratDuree_mois,id,identifiant,mdp,fonction FROM authentification where id=?;";
+           $res= mysqli_prepare($connect, $req);
+           $var= mysqli_stmt_bind_param($res,'i',$id);
+           $var= mysqli_execute($res); 
+           $var = mysqli_stmt_bind_result($res,$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$id,$identifiant,$mdp,$fonction);
+           mysqli_stmt_fetch($res);
+           mysqli_stmt_close($res);
+           $adresse= explode(",", $adresse);
+        }
+?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -28,20 +39,6 @@ if ($erreur!=""){
         <link rel="stylesheet" href="gestionSalarié_modifier_ajouter.css">
     </head>
     <body>
-
- <?php       
-        if ($_GET['id']!=0 && $_GET['id']!=NULL){
-           $id=intval($_GET['id']);
-           $req="SELECT nom,prenom,nationalite,adresse,age,sexe,situationFamiliale,tel,contrat,contratDuree_mois,id FROM authentification where id=?;";
-           $res= mysqli_prepare($connect, $req);
-           $var= mysqli_stmt_bind_param($res,'i',$id);
-           $var= mysqli_execute($res); 
-           $var = mysqli_stmt_bind_result($res,$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$id);
-           mysqli_stmt_fetch($res);
-           mysqli_stmt_close($res);
-           $adresse= explode(",", $adresse);
-        }
-?>
         
         <form method='post' action='gestionSalarié_vérification.php'>
             <div class='EtatCivil'>
@@ -121,32 +118,40 @@ if ($erreur!=""){
             </div>
          <div class='Fonction'>
                 <h2>Fonction</h2>
-                <label><strong>Contrat</strong></label>
-                <br><br>
                 
-                
-                <label id=contrat ><strong>Type de contrat</strong> </label>
-                
-                <input type="radio" name="contrat" value="CDD" <?php if($contrat=="CDD") echo 'checked'; ?>  required/>
-                <label>CDD </label>
-                <input type="radio" name="contrat" value="CDI" <?php if($contrat=="CDI") echo 'checked'; ?> required/>
-                <label>CDI </label></br></br>
-                </br></br>
-                <label id=contrat ><strong>Durée du contrat en mois(0 si CDI)</strong> </label>
-                <input type='text' name='contratDuree_mois' id='idcontrat' placeholder='Durée du contrat' value="<?php echo $contratDuree_mois;?>" required >
-                </br><label for='idLine'>___________________________________________________________</label>
-        
-                <br><br>
-                
-                
-            </div>
-            <div>
+                <label id=contrat ><strong>Type de contrat : </strong> </label>
+                <?php if($contrat=="CDD") {
+                        echo "<input type='text' name='contrat' value=$contrat  readonly>";
+                        echo '<label id=contrat ><strong>Durée du contrat en mois : </strong> </label>';
+                        echo "<input type='text' name='contratDuree_mois' value=$contratDuree_mois  readonly>"  ;
+                        echo '</br><label id=contrat ><strong>Poste : </strong> </label>';
+                        echo $fonction ;
 
+                    }
+                ?> 
+        
+                <br><br>    
+            </div>
+
+         <div class='Identifiants'>
+                <h2>Identifiants de connexion</h2>
+                
+                <label id=identifiant ><strong>Id : </strong> </label>
+                <?php 
+                    echo "<input type='text' name='id' value=$id  readonly>";
+                    echo '</br></br><label ><strong>Identifiant : </strong> </label>';                    
+                    echo "<input type='text' name='identifiant' value=$identifiant  readonly>";
+                    echo '</br></br><label><strong>Mot de passe : </strong> </label>';
+                    echo "<input type='text' name='mdp' placeholder='18 rue Molière' value=$mdp>";
+                    echo "</br><label for='idLine'>___________________________________________________________</label>";
+                ?> 
+        
+                <br><br>    
+            </div>
+            
+            <div>
                 <input type='submit' name=<?php echo $id; ?>  id='idsubmit' class='submit'/>
             </div>
         </form>
-        
-        
-        
     </body>
 </html>

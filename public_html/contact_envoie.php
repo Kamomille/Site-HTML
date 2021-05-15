@@ -13,9 +13,13 @@ $personne=$_SESSION['id'];
 $objet=$_POST['objet'];
 $message=$_POST['message'];
 
-$sql="INSERT INTO commentaire(personne,objet,message) VALUES('$personne','$objet','$message')";
-echo "$sql";
-mysqli_query($connect, $sql);
+$req="INSERT INTO commentaire(personne,objet,message) VALUES(?,?,?)";
+$result = mysqli_prepare($connect,$req);
+$var= mysqli_stmt_bind_param($result,'iss',$personne,$objet,$message);
+$var= mysqli_execute($result);
+mysqli_stmt_close($result);
+
+mysqli_close($connect);
 header("Location:http://localhost/projetSite_HTML/public_html/menu.php");
 
 ?>

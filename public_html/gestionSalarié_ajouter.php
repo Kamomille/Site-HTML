@@ -107,12 +107,12 @@ if ($erreur!=""){
                 <label><strong>Contrat</strong></label>
                 <br><br>
                 <label>CDD </label>
-                <input type="radio" name="contrat" value="CDD" />
+                <input type="radio" name="contrat" value="CDD" required/>
                 <label>CDI </label>
-                <input id="idCDI" type="radio" name="contrat" value="CDI"/>
+                <input id="idCDI" type="radio" name="contrat" value="CDI" required/>
                 </br></br>
                 <label id=contrat ><strong>Durée du contrat en mois</strong> </label>
-                <input type='text' name='contratDuree_mois' id='idcontrat' placeholder='Durée du contrat'>
+                <input type='text' name='contratDuree_mois' id='idcontrat' placeholder='Durée du contrat' required>
                 </br><label for='idLine'>___________________________________________________________</label>
                 
                 <br><br>
@@ -120,7 +120,7 @@ if ($erreur!=""){
                 <label for="idfonction"><strong>Fonction :</strong> </label>
                 <input type="radio" name="fonction" value="enseignant"  required/>  
                 <label for="idfonction">Enseignant </label>
-                <input type="radio" name="fonction" value="administration"  />
+                <input type="radio" name="fonction" value="administration"  required/>
                 <label for="idfonction">Personnel administratif</label>
                 
                 <br><br>

@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <?php 
 session_start();
-var_dump($_GET)?>
+?>
 <html>
     <head>
         <title>TODO supply a title</title>
