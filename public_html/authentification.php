@@ -23,10 +23,6 @@
             echo "<script>alert(\"Statut faux.\")</script>";
 
         else:
-
-            setcookie("identifiant",$_SESSION['identifiant'],time()+3600*24*2);
-            setcookie("role",$_SESSION['role'],time()+3600*24*2);
-            setcookie("id",$_SESSION['id'],time()+3600*24*2);            var_dump($_SESSION);
             header("Location:http://localhost/projetSite_HTML/public_html/menu.php");  
         endif;
              
@@ -55,17 +51,14 @@ function authentification($saisie_mdp,$saisie_identifiant){
                     $return = 'statut FAUX';
                     if (strcmp($_POST['idRadio'], 'Directeur') == 0 && strcmp($fonction, "directeur")==0){
                         $return='Directeur';
-                        setcookie("mdp",$mdp,time()+3600*24*2);
                         break;
                     }
                     if (strcmp($_POST['idRadio'], 'Salarié') == 0 && strcmp($fonction, "enseignant")==0){
                         $return='Salarié';
-                        setcookie("mdp",$mdp,time()+3600*24*2);
                         break;
                     }
                     if (strcmp($_POST['idRadio'], 'Salarié') == 0 && strcmp($fonction,"administration")==0){
                         $return='Salarié';
-                        setcookie("mdp",$mdp,time()+3600*24*2);
                         break;
                     }
                 }
@@ -73,15 +66,15 @@ function authentification($saisie_mdp,$saisie_identifiant){
         }
     }
     if($return!='FAUX'){
-        session_start();
-        $_SESSION['id']=$id;
-        $_SESSION['identifiant']=$identifiant;
-        $_SESSION['mdp']=$mdp;
-        $_SESSION['role']=$return;
-        $_SESSION['fonction']=$fonction;
-        mysqli_stmt_close($resultat);
-        mysqli_close($connect);            
-    }
+        setcookie("mdp",$mdp,time()+3600*24*2);
+        setcookie("identifiant",$identifiant,time()+3600*24*2);
+        setcookie("role",$return,time()+3600*24*2);
+        setcookie("id",$id,time()+3600*24*2);
+        setcookie("fonction",$fonction,time()+3600*24*2);
+          
+    }       
+    mysqli_stmt_close($resultat);
+    mysqli_close($connect);  
     return $return;
 }
 

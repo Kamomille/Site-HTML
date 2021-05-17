@@ -1,7 +1,16 @@
 <?php
 
 session_start() ;
-
+if(isset($_COOKIE)){
+    $_SESSION['id']=$_COOKIE['id'];
+    $_SESSION['identifiant']=$_COOKIE['identifiant'];
+    $_SESSION['mdp']=$_COOKIE['mdp'];
+    $_SESSION['role']=$_COOKIE['role'];
+    $_SESSION['fonction']=$_COOKIE['fonction'];    
+}
+ else {
+     header("Location:http://localhost/projetSite_HTML/public_html/index.html"); 
+}
 
 echo "<html>";
 echo "<table>";
