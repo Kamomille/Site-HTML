@@ -68,7 +68,6 @@ function authentification($saisie_mdp,$saisie_identifiant){
     if($return!='FAUX'){
         setcookie("mdp",$mdp,time()+3600*24*2);
         setcookie("identifiant",$identifiant,time()+3600*24*2);
-        setcookie("role",$return,time()+3600*24*2);
         setcookie("id",$id,time()+3600*24*2);
         setcookie("fonction",$fonction,time()+3600*24*2);
           

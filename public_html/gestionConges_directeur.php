@@ -22,11 +22,21 @@
 include 'database.php';
 
 if($connect) {
+    /*
+    $req="UPDATE congé SET id=?,personne=?,type=?,date_demande=?,date_congé=?,nbJour=?,état=?;";
+    $res= mysqli_prepare($connect, $req);
+    $var= mysqli_stmt_bind_param($res,'iss',$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$fonction,$contrat,$contratDuree_mois,$mdp,$id);
+    $var= mysqli_execute($res);
+    mysqli_stmt_close($res);   
+    */
+    
     $req = 'SELECT id, personne, type, date_demande, date_congé, nbJour, état FROM congé';
     $resultat = mysqli_query($connect, $req);
     if($resultat == false) echo "Echec de l'exécution de la requête";
     
-    else{      
+    else{
+          
+    if (true){
        
         echo "<form method='post' action='gestionConges_directeur_appuiBouton.php'>";
         if (isset($_GET['date'])){ 
@@ -67,6 +77,7 @@ if($connect) {
         echo "</table>".'<br>'.'<br>'.'<br>'.'<br>';
     }
 }
+}
 
 function tableau($ligne, $numBouton_validé, $numBouton_refuser, $numBouton_commentaire) {
     echo "<tr>" 
@@ -90,43 +101,40 @@ function tableau($ligne, $numBouton_validé, $numBouton_refuser, $numBouton_comm
     }
     echo "</tr>";
 }
-
+    
        
 // Tableau 2 ------------------------------------------------------------------------------
 
 echo '<br>'.'<br>'.'Tableau inutil mais demandé a la question 5.4.'.'<br>'.'<br>';
 
 if($connect) {
-    $req = 'SELECT id, personne, date_congé, état, date_demande, nbJour FROM congé';
-    //$req2 = 'SELECT id, congésPayés, congésRTT FROM authentification';
+    $req = 'SELECT personne, type, nbJour, état FROM congé';
     
     $resultat = mysqli_query($connect, $req);
     if($resultat == false) echo "Echec de l'exécution de la requête";
     
     else{
-        
-        
-    
-    echo "<form method='post' action='gestionConges_directeur_appuiBouton.php'>"
-        ."<table border='1px solid black'>"
-        ."<td><label> </label></td>";
-            
-    
-    while($ligne = mysqli_fetch_row($resultat)){
-         echo "<td><label>Id $ligne[1]</label></td>";
-    }
-   
-    echo "<tr>"
-        ."<td><label>Congés payés</label></td>"
-        ."<td><label>Nombres congés</label></td>"
-    ."</tr>"
-    ."<tr>"
-        ."<td><label>RTT</label></td>"
-        ."<td><label>Nombres congés</label></td>"
-        ."<td><label>Nombres congés</label></td>"
-    ."</tr>";
-        
-    echo "</table>".'<br>'.'<br>'.'<br>'.'<br>';
+        echo "<form method='post' action='gestionConges_directeur_appuiBouton.php'>"
+            ."<table border='1px solid black'>"
+            ."<tr><td><label> </label></td>";
+
+        while($ligne = mysqli_fetch_row($resultat)){
+             echo "<td><label>Id $ligne[0]</label></td>";
+        }
+        echo "</tr>";
+        while($ligne = mysqli_fetch_row($resultat)){
+             echo "<td><label>Id $ligne[1]</label></td>";
+        }
+        echo "<tr>"
+            ."<td><label>Congés payés</label></td>";
+        echo "</tr>"
+        ."<tr>"
+            ."<td><label>RTT</label></td>"
+            ."<td><label>Nombres congés</label></td>"
+            ."<td><label>Nombres congés</label></td>"
+        ."</tr>";
+
+        echo "</table>".'<br>'.'<br>'.'<br>'.'<br>';
         
     }
 }
