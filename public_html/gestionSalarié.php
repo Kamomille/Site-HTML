@@ -17,27 +17,12 @@
             foreach ($_POST as $key => $val){
                 $req="DELETE FROM authentification WHERE id=?";
                 $res= mysqli_prepare($connect, $req);
-                $var= mysqli_stmt_bind_param($res,'s', $key);
+                $var= mysqli_stmt_bind_param($res,'i', $key);
                 $var= mysqli_execute($res); 
                 mysqli_stmt_close($res);
             }
         }
         
-        else {
-            $id=intval($_POST['id']);
-            foreach ($_POST as $key => $val){
-                if ($val!=NULL){
-                    $req="UPDATE authentification SET ?=? where id=?";
-                    $res= mysqli_prepare($connect, $req);
-                    $var= mysqli_stmt_bind_param($res,'ssi', $key,$val,$id);
-                    $var= mysqli_execute($res); 
-                    mysqli_stmt_close($res);
-                    
-                }
-                
-            }
-            
-        }
     }
 ?>
 <!--
@@ -73,20 +58,21 @@ and open the template in the editor.
         ?>
         <table border="1">
             <tr>
-                <td>Sélection</td>
-                <td>Adresse mail</td>
-                <td>Nom</td>
-                <td>Prénom</td>
-                <td>Fonction</td>
-                <td>Type Contrat</td>
-                <td>Durée du contrat(mois)</td>
-                <td>date d'embauche</td>
-                <td>Congés RTT</td>
-                <td>Congés payés</td>
+                <?php if ($_SESSION['role']=='directeur') echo '<th>Sélection</th>';?>
+                
+                <th>Adresse mail</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Fonction</th>
+                <th>Type Contrat</th>
+                <th>Durée du contrat(mois)</th>
+                <th>date d'embauche</th>
+                <th>Congés RTT</th>
+                <th>Congés payés</th>
 <?php
-                if ($_SESSION['role']=='Directeur'){
-                    echo "<td>Modification</td>"
-                    ."<td>Suppression</td>";
+                if ($_SESSION['role']=='directeur'){
+                    echo "<th colspan=2>Opération</th>";
+
                 }
 ?>
             </tr>
@@ -96,17 +82,19 @@ and open the template in the editor.
                 foreach($res as $personne){
             
                     echo '<tr>';
+                    if($_SESSION['role']=='directeur'){
                         echo "<td><input type='checkbox' name='$personne[0]' value='$personne[0]'</td>";
+                    }
                         for($i=1;$i<sizeof($personne);$i++){
                             echo "<td>$personne[$i]</td>";
                         }
-                        if ($_SESSION['role']=='Directeur'){
+                        if ($_SESSION['role']=='directeur'){
                             echo"<td><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_modifier.php?id=$personne[0]'>Modifier</a></td>";
                             echo"<td><input type='submit' value='supprimer' name='$personne[0]'></td>";
                         }
                     echo '</tr>';
             }
-            if ($_SESSION['role']=='Directeur'){
+            if ($_SESSION['role']=='directeur'){
                 echo '<tr>';
                 echo"<td><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_ajouter.php?id=0'>Ajouter</a></td>";
                 echo '</tr>';

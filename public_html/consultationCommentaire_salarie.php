@@ -41,9 +41,10 @@ and open the template in the editor.
         
         $req="SELECT commentaire.id,personne,nom,prenom,identifiant,objet,message FROM commentaire JOIN authentification on authentification.id=personne WHERE authentification.id=? ORDER BY commentaire.id DESC;";
         $result = mysqli_prepare($connect,$req);
-        $var= mysqli_stmt_bind_param($result,'i', $id);
+        $id=$_SESSION['id'];
+        $var= mysqli_stmt_bind_param($result,'i',$id);
         $var=mysqli_execute($result);
-        $result=mysqli_stmt_bind_result($result,$idCommentaire,$id,$nom,$prenom,$identifiant,$objet,$message);
+        mysqli_stmt_bind_result($result,$idCommentaire,$id,$nom,$prenom,$identifiant,$objet,$message);
         
         $res=[];
         
@@ -56,15 +57,15 @@ and open the template in the editor.
         
             <table border="1">
                 <tr>
-                    <td>Sélection</td>
-                    <td>Id</td>
-                    <td>Prénom</td>
-                    <td>Nom</td>
-                    <td>Mail</td>
-                    <td>Objet</td>
-                    <td>Message</td>
-                    <td>Supprimer</td>
-                    <td>Répondre</td>
+                    <th>Sélection</th>
+                    <th>Id</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Mail</th>
+                    <th>Objet</th>
+                    <th>Message</th>
+                    <th>Supprimer</th>
+                    <th>Répondre</th>
                 </tr>
 
                 <form action="consultationCommentaire_salarie.php" method="post">
@@ -72,7 +73,7 @@ and open the template in the editor.
                     foreach($res as $commentaire){
 
                         echo '<tr>';
-                            echo "<td><input type='checkbox' name='$commentaire[0]' value='$commentaire[0]'</td>";
+                        echo "<td><input type='checkbox' name='$commentaire[0]' value='$commentaire[0]'</td>";
                             for($i=1;$i<sizeof($commentaire);$i++){
                                 echo "<td>$commentaire[$i]</td>";
                             }
@@ -81,12 +82,8 @@ and open the template in the editor.
                         echo '</tr>';
                 }
 ?>
-            echo '</table>';
-            echo '</form>';
+                </table>
+            </form>
         
-    
-        
-
-?>
     </body>
 </html>

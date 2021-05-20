@@ -57,7 +57,12 @@ if ($check){
         header("Location:http://localhost/projetSite_HTML/public_html/gestionProfil_formulaire.php?id=$id"."$erreur");
     }
     else {
-        header("Location:http://localhost/projetSite_HTML/public_html/gestionSalarié_ajouter.php?id=$id"."$erreur");
+        if($id==0){
+            header("Location:http://localhost/projetSite_HTML/public_html/gestionSalarié_ajouter.php?id=$id"."$erreur");
+        }
+        else {
+            header("Location:http://localhost/projetSite_HTML/public_html/gestionSalarié_modifier.php?id=$id"."$erreur");
+        }
     }
     
 }
@@ -74,18 +79,12 @@ else {
         $tel=strval($_POST['telephone']);
         $contrat=strval($_POST['contrat']);
         $contratDuree_mois=intval($_POST['contratDuree_mois']);
-        if($_SESSION['role']=="directeur"){
-            $fonction=$_POST['fonction'];
-        }
-        else {
-            $fonction=$_SESSION['fonction'];
-        }
         
         $_SESSION['mdp']=$mdp;
         
-        $req="UPDATE authentification SET nom=?,prenom=?,nationalite=?,adresse=?,age=?,sexe=?,situationFamiliale=?,tel=?,fonction=?,contrat=?,contratDuree_mois=?,mdp=?  WHERE id=?;";
+        $req="UPDATE authentification SET nom=?,prenom=?,nationalite=?,adresse=?,age=?,sexe=?,situationFamiliale=?,tel=?,contrat=?,contratDuree_mois=?,mdp=?  WHERE id=?;";
         $res= mysqli_prepare($connect, $req);
-        $var= mysqli_stmt_bind_param($res,'ssssisssssisi',$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$fonction,$contrat,$contratDuree_mois,$mdp,$id);
+        $var= mysqli_stmt_bind_param($res,'ssssissssisi',$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$mdp,$id);
         $var= mysqli_execute($res);
         mysqli_stmt_close($res);       
         
@@ -118,7 +117,12 @@ else {
        $tel=$_POST['telephone'];
        $fonction=$_POST['fonction'];
        $contrat=$_POST['contrat'];
-       $contratDuree_mois=$_POST['contratDuree_mois'];
+       if($_POST["contrat"]=="CDD"){
+           $contratDuree_mois=$_POST['contratDuree_mois'];
+       }
+        else {
+           $contratDuree_mois=null;
+        }
 
 
        $req="INSERT INTO authentification(identifiant,mdp,fonction,congesPayes,congesRTT,nom,prenom,nationalite,adresse,age,sexe,situationFamiliale,tel,contrat,contratDuree_mois) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";

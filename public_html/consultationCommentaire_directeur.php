@@ -4,7 +4,7 @@
     $check=false;
 
     if ($_POST!=NULL){
-        $id=$_POST['id']; 
+        
         foreach ($_POST as $key => $val){
             if($val=='supprimer'){
                 $check=true;
@@ -12,16 +12,15 @@
             break;
         }
         
-        if ($check=true){
+        if ($check==true){
             foreach ($_POST as $key => $val){
-                //mysqli_query($connect,"DELETE FROM commentaire WHERE id=$key");
                 $req="DELETE FROM commentaire WHERE id=?";
-                $result = mysqli_prepare($connect,$req);
-                $var= mysqli_bind_param($result,'i',$key);
-                $var=mysqli_execute($result);
-                
+                $res= mysqli_prepare($connect, $req);
+                $var= mysqli_stmt_bind_param($res,'s', $key);
+                $var= mysqli_execute($res); 
+                mysqli_stmt_close($res);
             }
-        }            
+        }
     }
  ?>
 <!DOCTYPE html>
@@ -55,15 +54,15 @@ and open the template in the editor.
 
        <table border="1">
            <tr>
-               <td>Sélection</td>
-               <td>Id</td>
-               <td>Prénom</td>
-               <td>Nom</td>
-               <td>Mail</td>
-               <td>Objet</td>
-               <td>Message</td>
-               <td>Supprimer</td>
-               <td>Répondre</td>
+               <th>Sélection</th>
+               <th>Id</th>
+               <th>Prénom</th>
+               <th>Nom</th>
+               <th>Mail</th>
+               <th>Objet</th>
+               <th>Message</th>
+               <th>Supprimer</th>
+               <th>Répondre</th>
            </tr>
 
                <form action="consultationCommentaire_directeur.php" method="post">

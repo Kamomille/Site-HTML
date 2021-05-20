@@ -5,7 +5,13 @@ if(isset($_COOKIE)){
     $_SESSION['id']=$_COOKIE['id'];
     $_SESSION['identifiant']=$_COOKIE['identifiant'];
     $_SESSION['mdp']=$_COOKIE['mdp'];
-    $_SESSION['fonction']=$_COOKIE['fonction'];    
+    $_SESSION['fonction']=$_COOKIE['fonction'];
+    if($_SESSION['fonction']=='directeur'){
+        $_SESSION['role']='directeur';
+    }
+    else {
+        $_SESSION['role']='salarie';
+    }
 }
  else {
      header("Location:http://localhost/projetSite_HTML/public_html/index.html"); 
