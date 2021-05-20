@@ -5,7 +5,6 @@ include 'database.php';
         
 if ($_POST['ok']){ 
     $date =$_POST['mois'];
-    echo $date;
     header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php?date=$date");
 }
 
@@ -29,7 +28,10 @@ if($connect) {
             if (isset($_POST[$numBouton_validé])){ 
                 $req = "update congé set état = 'Validé' where id = $compt";
                 $resultat = mysqli_query($connect, $req);
-                header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php");
+                if (isset($_POST['mois'])){
+                    $date =$_POST['mois'];
+                    header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php?date=$date");}
+                else {header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php");}
                 break;
             }
             
@@ -38,14 +40,17 @@ if($connect) {
             if (isset($_POST[$numBouton_refuser])){
                 $req = "update congé set état = 'Refusé' where id = $compt";
                 $resultat = mysqli_query($connect, $req);
-                header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php");
+                if (isset($_POST['mois'])){
+                    $date =$_POST['mois'];
+                    header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php?date=$date");}
+                else {header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php");}
                 break;
             }
             
             // ------------------ Commenter --------------------------
             
             if (isset($_POST[$numBouton_commentaire])){
-                echo 'vous avez appuyé sur le bouton '.$numBouton_commentaire;
+                header("Location:http://localhost/projetSite_HTML/public_html/contact.php?obj");
                 break;
             }
         }

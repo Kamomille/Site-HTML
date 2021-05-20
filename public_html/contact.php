@@ -5,7 +5,15 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php 
-session_start();
+session_start() ;
+if(isset($_COOKIE)){
+    $_SESSION['id']=$_COOKIE['id'];
+    $_SESSION['identifiant']=$_COOKIE['identifiant'];
+    $_SESSION['mdp']=$_COOKIE['mdp'];
+    $_SESSION['fonction']=$_COOKIE['fonction'];  
+    $_SESSION['nom']=$_COOKIE['nom'];
+    $_SESSION['prenom']=$_COOKIE['prenom'];
+}
 ?>
 <html>
     <head>
@@ -27,23 +35,23 @@ session_start();
             <div class="Contact">
                 <label><strong>situation familiale</strong></label>
 
-
                 <br><br>
 
-                <label><strong>Autheur</strong> </label>
+                <label><strong>Auteur</strong> </label>
                 <?php echo $_SESSION['nom'].' '.$_SESSION['prenom'] ?>
                 </br><label>___________________________________________________________</label>
 
                 <br><br>
                 
                 <label><strong>Mail</strong> </label>
-                <?php echo $_SESSION['mail'] ?>
+                <?php echo $_SESSION['identifiant'] ?>
                 </br><label>___________________________________________________________</label>
 
                 <br><br>
 
                 <label><strong>Objet</strong> </label>
-                <input type="text" name="objet"  placeholder="Objet" value="<?php if ($_GET!=null) echo "RE: ".$_GET['objet']?>" required/>
+                <input type="text" name="objet"  placeholder="Objet" value="
+                        <?php if (isset($_GET['obj'])){echo 'Commentaire demande de congé';}elseif ($_GET!=null) echo "RE: ".$_GET['objet']?>" required/>
                 </br><label>___________________________________________________________</label>
 
                 <br><br>

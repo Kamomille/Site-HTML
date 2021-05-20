@@ -32,10 +32,10 @@
 function authentification($saisie_mdp,$saisie_identifiant){
     include 'database.php';
     if($connect) {
-        $req = 'SELECT id,identifiant, mdp, fonction FROM authentification;';
+        $req = 'SELECT id,identifiant, mdp, fonction, nom, prenom FROM authentification;';
         $resultat = mysqli_prepare($connect,$req);
         $var=mysqli_execute($resultat);
-        mysqli_stmt_bind_result($resultat,$id,$identifiant,$mdp,$fonction);
+        mysqli_stmt_bind_result($resultat,$id,$identifiant,$mdp,$fonction,$nom,$prenom);
         
         if($resultat == false) echo "Echec de l'exécution de la requête";
         else {
@@ -70,6 +70,8 @@ function authentification($saisie_mdp,$saisie_identifiant){
         setcookie("identifiant",$identifiant,time()+3600*24*2);
         setcookie("id",$id,time()+3600*24*2);
         setcookie("fonction",$fonction,time()+3600*24*2);
+        setcookie("nom",$nom,time()+3600*24*2);
+        setcookie("prenom",$prenom,time()+3600*24*2);
           
     }       
     mysqli_stmt_close($resultat);
