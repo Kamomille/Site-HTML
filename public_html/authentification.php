@@ -65,7 +65,7 @@ function authentification($saisie_mdp,$saisie_identifiant){
             }
         }
     }
-    if($return!='FAUX'){
+    if($return=='Salarié' || $return=='Directeur'){
         setcookie("mdp",$mdp,time()+3600*24*2);
         setcookie("identifiant",$identifiant,time()+3600*24*2);
         setcookie("id",$id,time()+3600*24*2);
