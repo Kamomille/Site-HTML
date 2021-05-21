@@ -39,6 +39,16 @@ and open the template in the editor.
         <link rel="stylesheet" href="gestionSalarié_modifier_ajouter.css">
     </head>
     <body>
+        <nav>
+            <a href="http://localhost/projetSite_HTML/public_html/menu.php">Menu</a>
+            <a href="http://localhost/projetSite_HTML/public_html/contact.php">Contact</a>
+            <a href="http://localhost/projetSite_HTML/public_html/consultationCommentaire_salarie.php">Commentaire</a>
+            <a href="http://localhost/projetSite_HTML/public_html/gestionProfil.php">Gestion de profil</a>
+            <a href="http://localhost/projetSite_HTML/public_html/gestionSalari%C3%A9.php">Gestion de salariés</a>
+            <a href="http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php">Gestion de congé</a>
+            <a href="http://localhost/projetSite_HTML/public_html/index.html">Déconnexion</a>
+
+        </nav>
         
         <form method='post' action='gestionSalarié_vérification.php'>
             <div class='EtatCivil'>

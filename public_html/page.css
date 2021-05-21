@@ -4,7 +4,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 1 mars 2021, 19:51:11
+    Created on : 21 mai 2021, 21:56:22
     Author     : cedric
 */
 nav{
@@ -19,7 +19,7 @@ nav{
     margin:0; 
 }
 
-a{
+a.nav{
     text-align: center;
     width: 200px;
     background: none;
@@ -30,44 +30,33 @@ a{
     color: white;
 }
 
-a:hover{
+a.nav:hover{
     background-color: #6B9394;
 }
 
-div{
-    align-content: center;
-    margin: 100px;
-    border: thick ridge gray;
+
+
+table{
+    border-collapse: collapse;
+    margin-left: 40px;
     margin-right: 10px;
+    margin-top: 10px;
+}
+td{
+    width: 110px;
+    padding:  5px;
+    
+}
+tr{
+   background-color:#FFF7E2; 
+}
+tr:nth-child(2n){
+    background-color:#FFF7F2;
+}
+tr:hover{
+   background-color:#F7EFE2; 
+}
 
-}
-label{
-    margin: 20px;
-}
-input[type=text]{
-    border: none;
-    width:20vw;
-}
-
-input:hover{
-    background-color: lightgray;
-}
-input.submit:hover{
-    background-color: greenyellow;
-}
-
-textarea{
-    margin: 10px;
-    width: 300px;
-    height: 150px;
-}
-input.submit{
-    background-color: lightgrey;
-    margin: 20px;
-    width: 150px;
-    height: 50px;
-}
-h2{
-    text-decoration: underline;
-    margin: 20px;
+th{
+    background-color:#E0AA6A;
 }

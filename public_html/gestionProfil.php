@@ -30,15 +30,23 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- <link rel="stylesheet" href="gestionProfil.css"> -->
+        <link href="page.css" rel="stylesheet" type="text/css">
     </head>
     <body>
+
         <header>
             <img src="image\Esme_logo.png" class="esme">
             <h1 class="titre">Gestion de congé</h1>
         </header>
         <nav>
-            <a class='nav' href="contact.html">Contactez-nous</a>
-            <a class="nav" href="particulier.html">Particuliers</a> 
+            <a class="nav" href="http://localhost/projetSite_HTML/public_html/menu.php">Menu</a>
+            <a class="nav" href="http://localhost/projetSite_HTML/public_html/contact.php">Contact</a>
+            <a class="nav" href="http://localhost/projetSite_HTML/public_html/consultationCommentaire_salarie.php">Commentaire</a>
+            <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionProfil.php">Gestion de profil</a>
+            <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionSalari%C3%A9.php">Gestion de salariés</a>
+            <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php">Gestion de congé</a>
+            <a class="nav" href="http://localhost/projetSite_HTML/public_html/index.html">Déconnexion</a>
+
         </nav>
         <div class="mainLayout">
             <h1><?php echo $nom." ".$prenom ?>- Informations personnelles</h1>
