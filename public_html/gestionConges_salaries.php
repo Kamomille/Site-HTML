@@ -1,4 +1,12 @@
-
+<?php 
+session_start() ;
+if(isset($_COOKIE)){
+    $login=$_COOKIE['identifiant'];
+    $id=$_COOKIE['id'];
+    $nom=$_COOKIE['nom'];
+    $prenom=$_COOKIE['prenom'];
+}
+?>
 <html>
     <head>
         <title>Demande de congé</title>
@@ -16,20 +24,15 @@
         
 <?php
 
-    session_start();
-    $prenom=$_SESSION['prenom'];
-    $nom=$_SESSION['nom'];
-    $login=$_SESSION['identifiant'];
 
     include 'database.php';
 
 // ------------------------- Nombre de jours restant ---------------------------------
     
     if($connect) {
-        $req = 'SELECT id, congésRTT, congésPayés FROM authentification';
+        $req = 'SELECT id, congesRTT, congesPayes FROM authentification';
         $resultat = mysqli_query($connect, $req);
         if($resultat == false) echo "Echec de l'exécution de la requête";
-
         else{
             while($ligne = mysqli_fetch_row($resultat)){
                 if ($_SESSION['id'] == $ligne[0]){
@@ -39,7 +42,8 @@
             }
         }  
     }
-
+$date_demande=date("Y-m-d");
+echo $date_demande;
     
 // ------------------------- Historique des demandes de congés ---------------------------------
 
@@ -60,7 +64,7 @@
                 ."<td><label>Etat</label></td>";
 
             while($ligne = mysqli_fetch_row($resultat)){
-                if ($_SESSION['id'] == $ligne[0]){
+                if ($id == $ligne[0]){
                     echo "<tr>" 
                         ."<td><label>$ligne[1]</label></td>"
                         ."<td><label>$ligne[2]</label></td>"
@@ -100,14 +104,10 @@
             ."<tr>"
                 ."<td><label for='idRadio'>Type de congé  :</label></td>"
                 ."<td><label for='idRadio'>Congés payés</label>"
-                    ."<input type='radio' name='typeConges' value='congesPaye' required/>"
+                    ."<input type='radio' name='typeConges' value='CP' required/>"
                     ."<label for='idRadio'>RTT</label>"
                     ."<input type='radio' name='typeConges' value='RTT' required/> </br></br></td>"
             ."</tr>"
-            ."<tr>" 
-                ."<td><label for='start'>Date de demande de congé :</label></td>"
-                ."<td><input type='date' id='date_demande' name='date_demande' placeholder='dd-mm-yyyy' value='2018-07-22' min='2018-01-01' max='2028-12-31' ></td>"
-            ."<tr>"
             ."<tr>"
                 ."<td><label for='start'>Date de début de congé :</label></td>"
                 ."<td><input type='date' id='date_congé' name='date_congé' placeholder='dd-mm-yyyy' value='2018-07-22' min='2018-01-01' max='2028-12-31' ></td>"
