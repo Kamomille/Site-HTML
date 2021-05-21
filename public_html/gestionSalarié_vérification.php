@@ -23,7 +23,7 @@ if (strlen($_POST['nom'])<2){
 if (isset($_POST['mdp'])){
     $page=true;
     $mdp=$_POST['mdp'];
-    if(!preg_match("#^[A-Z]([a-z A-Z 0-9]){6,}[0-9]$#",$_POST['mdp'])){
+    if(!preg_match("#^[A-Z]([a-z A-Z 0-9 _ -]){6,}[0-9]$#",$_POST['mdp'])){
     $erreur=$erreur."&mdp=erreur";
     $check=true;   
     }
