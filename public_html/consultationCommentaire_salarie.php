@@ -4,7 +4,7 @@
     $check=false;
 
     if ($_POST!=NULL){
-        $id=$_POST['id']; 
+        
         foreach ($_POST as $key => $val){
             if($val=='supprimer'){
                 $check=true;
@@ -12,16 +12,15 @@
             break;
         }
         
-        if ($check=true){
+        if ($check==true){
             foreach ($_POST as $key => $val){
-                //mysqli_query($connect,"DELETE FROM commentaire WHERE id=$key");
                 $req="DELETE FROM commentaire WHERE id=?";
-                $result = mysqli_prepare($connect,$req);
-                $var= mysqli_bind_param($result,'i',$key);
-                $var=mysqli_execute($result);
-                
+                $res= mysqli_prepare($connect, $req);
+                $var= mysqli_stmt_bind_param($res,'s', $key);
+                $var= mysqli_execute($res); 
+                mysqli_stmt_close($res);
             }
-        }            
+        }
     }
  ?>
 <!DOCTYPE html>
@@ -78,7 +77,7 @@ and open the template in the editor.
                                 echo "<td>$commentaire[$i]</td>";
                             }
                             echo"<td><input type='submit' value='supprimer' name='$commentaire[0]'></td>";
-                            echo"<td><input type='submit' value='répondre' name='$commentaire[0]'></td>";
+                            echo"<td><a href='http://localhost/projetSite_HTML/public_html/contact.php?objet=$commentaire[5]'>Répondre</a></td>";
                         echo '</tr>';
                 }
 ?>
