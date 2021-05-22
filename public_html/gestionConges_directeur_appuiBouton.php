@@ -3,7 +3,7 @@
 include 'database.php';
 
         
-if ($_POST['ok']){ 
+if (isset($_POST['ok'])){ 
     $date =$_POST['mois'];
     header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php?date=$date");
 }
@@ -28,10 +28,12 @@ if($connect) {
             if (isset($_POST[$numBouton_validé])){ 
                 $req = "update congé set état = 'Validé' where id = $compt";
                 $resultat = mysqli_query($connect, $req);
+                reperage($compt);
                 if (isset($_POST['mois'])){
                     $date =$_POST['mois'];
-                    header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php?date=$date");}
-                else {header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php");}
+                    //header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php?date=$date");
+                    }
+                //else {header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php");}
                 break;
             }
             
@@ -60,7 +62,58 @@ if($connect) {
 mysqli_close($connect);
 
 
-
+function reperage($id_congé){
+    include 'database.php';
+    if($connect) {
+        $req="SELECT personne,nbJour,type FROM congé WHERE id=$id_congé;";
+        $resultat = mysqli_prepare($connect,$req);
+        mysqli_stmt_bind_result($resultat,$personne,$nbJour,$type);
+        $var= mysqli_execute($resultat);
+        if($resultat == false) echo "Echec de l'exécution de la requête";
+        else {
+            while (mysqli_stmt_fetch($resultat)){
+                echo $personne;
+            }
+        }
+        mysqli_stmt_close($resultat);  
+    }
+    include 'database.php';
+    if($connect) {
+        $req="SELECT congesRTT,congesPayes FROM authentification WHERE id=$personne;";
+        $resultat = mysqli_prepare($connect,$req);
+        mysqli_stmt_bind_result($resultat,$congesRTT,$congesPayes);
+        $var= mysqli_execute($resultat);
+        if($resultat == false) echo "Echec de l'exécution de la requête";
+        else {
+            while (mysqli_stmt_fetch($resultat)){
+                echo $personne;
+            }
+        }
+        mysqli_stmt_close($resultat);  
+    }
+    include 'database.php';
+    if($connect) {
+        if (strcmp($type,'CP') == 0){
+            $new = $nbJour - $congesPayes;
+            $req="UPDATE authentification SET $congesPayes=$new  WHERE id=$personne;";
+            $res= mysqli_prepare($connect, $req);
+            $var= mysqli_stmt_bind_param($res,'i',$congesPayes);
+            $var= mysqli_execute($res);
+            mysqli_stmt_close($res);  
+        }
+    }
+    if($connect) {
+        if (strcmp($type,'RTT') == 0){
+            $new = $congesRTT - $nbJour;
+            echo 'n :'.$new;
+            echo 'c :'.$congesRTT;
+            echo 'nb :'.$nbJour;
+            $req = "update authentification set $congesRTT=$new  where id=$personne";
+            $resultat = mysqli_query($connect, $req);
+        }
+    }
+     
+}
 
 
 ?>

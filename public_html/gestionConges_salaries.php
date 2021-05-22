@@ -54,7 +54,6 @@ if(isset($_COOKIE)){
         }  
     }
 $date_demande=date("Y-m-d");
-echo $date_demande;
     
 // ------------------------- Historique des demandes de congés ---------------------------------
 

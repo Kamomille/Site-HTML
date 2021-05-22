@@ -96,10 +96,13 @@ function tableau($id,$personne,$type,$date_demande,$date_congé,$nbJour,$état, 
     }
     if ($état == "Refusé"){
         echo "<td bgcolor='red'><label>$état</label></td>"
-        . "<td><input type='submit' value='Commenter' name='$numBouton_commentaire' /></td>";
+        . "<td><input type='submit' value='Commenter' name='$numBouton_commentaire' /></td>"
+        . "<td><label> </label></td>";
     }
     if ($état == "Validé"){
-        echo "<td bgcolor='green'><label>$état</label></td>";
+        echo "<td bgcolor='green'><label>$état</label></td>"
+        . "<td><label> </label></td>"
+        . "<td><label> </label></td>";
     }
     echo "</tr>";
 }
