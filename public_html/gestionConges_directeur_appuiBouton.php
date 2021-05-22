@@ -31,9 +31,9 @@ if($connect) {
                 reperage($compt);
                 if (isset($_POST['mois'])){
                     $date =$_POST['mois'];
-                    //header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php?date=$date");
+                    header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php?date=$date");
                     }
-                //else {header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php");}
+                else {header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php");}
                 break;
             }
             
@@ -94,27 +94,27 @@ function reperage($id_congé){
     include 'database.php';
     if($connect) {
         if (strcmp($type,'CP') == 0){
-            $new = $nbJour - $congesPayes;
-            $req="UPDATE authentification SET $congesPayes=$new  WHERE id=$personne;";
-            $res= mysqli_prepare($connect, $req);
-            $var= mysqli_stmt_bind_param($res,'i',$congesPayes);
-            $var= mysqli_execute($res);
-            mysqli_stmt_close($res);  
+            $new = $congesPayes - $nbJour;
+            $req = "update authentification set $congesPayes=$new  where id=$personne";
+            $resultat = mysqli_query($connect, $req);
         }
     }
     if($connect) {
         if (strcmp($type,'RTT') == 0){
             $new = $congesRTT - $nbJour;
-            echo 'n :'.$new;
-            echo 'c :'.$congesRTT;
-            echo 'nb :'.$nbJour;
             $req = "update authentification set $congesRTT=$new  where id=$personne";
             $resultat = mysqli_query($connect, $req);
         }
     }
      
 }
-
+            /*
+            $new = $nbJour - $congesPayes;
+            $req="UPDATE authentification SET $congesPayes=$new  WHERE id=$personne;";
+            $res= mysqli_prepare($connect, $req);
+            $var= mysqli_stmt_bind_param($res,'i',$congesPayes);
+            $var= mysqli_execute($res);
+            mysqli_stmt_close($res); */
 
 ?>
 

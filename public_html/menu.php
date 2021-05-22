@@ -37,6 +37,7 @@ echo "<tr>";
     if (strcmp($_SESSION['fonction'], 'directeur') == 0) {
         echo "<td><a href='gestionConges_directeur.php'>Gestion Congés</a></td>";
     }
+    echo "<td><a href='ajout_CV.php'>test ajout CV</a></td>";
 echo "</tr>";
 
 echo "</table><html>";
