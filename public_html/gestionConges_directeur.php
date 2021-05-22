@@ -110,6 +110,66 @@ function tableau($id,$personne,$type,$date_demande,$date_congé,$nbJour,$état, 
        
 echo '<br>'.'<br>'.'Tableau récapitulatif du nombres de jours de congé demandés'.'<br>'.'<br>';
 
+$tab_id = array();
+echo "<table border='1px solid black'>"
+    ."<td><label> </label></td>";
+
+if($connect) {
+    $req="SELECT id FROM authentification
+        WHERE id IN (
+            SELECT personne
+            FROM congé C
+            JOIN authentification A ON A.id=C.personne);";
+    $resultat = mysqli_prepare($connect,$req);
+    mysqli_stmt_bind_result($resultat,$id);
+    $var= mysqli_execute($resultat);  
+    if($resultat == false) echo "Echec de l'exécution de la requête";
+    else {
+        while (mysqli_stmt_fetch($resultat)){
+            array_push($tab_id, $id);
+            echo "<td><label>$id</label></td>";
+        }
+    }
+    mysqli_stmt_close($resultat);
+}
+echo "</tr>"."<td><label>Congés payés</label></td>";
+tableau_2($tab_id,'CP');
+echo "</tr>"."<td><label>RTT</label></td>";
+tableau_2($tab_id,'RTT');
+echo "</table>";
+
+function tableau_2($tab_id,$type_de_congé){
+    include 'database.php';
+    for($i=0; $i<count($tab_id); $i++){
+        $a = $tab_id[$i];
+        if($connect) {
+            $req="SELECT nbJour,état,type FROM congé WHERE personne = $a";
+            $resultat = mysqli_prepare($connect,$req);
+            mysqli_stmt_bind_result($resultat,$nbJour,$état,$type);
+            $var= mysqli_execute($resultat);  
+            if($resultat == false) echo "Echec de l'exécution de la requête";
+            else {
+                echo '<td><label>';
+                echo "<table>";
+                while (mysqli_stmt_fetch($resultat)){
+                    if (strcmp($type, $type_de_congé) == 0){
+                        if ($état == ""){echo "<td><label>$nbJour</label></td>";}
+                        if ($état == "Refusé"){echo "<td bgcolor='red'><label>$nbJour</label></td>";}
+                        if ($état == "Validé"){echo "<td bgcolor='green'><label>$nbJour</label></td>";}
+                    }
+                    else {echo "<td><label> </label></td>";}
+                }
+                echo "</table>"."</label></td>";
+            }
+            mysqli_stmt_close($resultat);
+        }
+    }
+    echo "</tr>";
+    
+    
+}
+
+/*
 // remplissage des la liste personne -------------------------------------------
 if($connect) {
     $req="SELECT id FROM authentification";
@@ -218,7 +278,7 @@ function tableau_2($i,$tab,$type_congé){
         mysqli_stmt_close($resultat);
     }
 }
-
+*/
 ?>
         </body>
 </html>
