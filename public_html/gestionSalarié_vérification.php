@@ -117,28 +117,29 @@ else {
        $tel=$_POST['telephone'];
        $fonction=$_POST['fonction'];
        $contrat=$_POST['contrat'];
+       $CV=$_POST['CV'];
        if($_POST["contrat"]=="CDD"){
            $contratDuree_mois=$_POST['contratDuree_mois'];
        }
         else {
            $contratDuree_mois=null;
         }
-
-
-       $req="INSERT INTO authentification(identifiant,mdp,fonction,congesPayes,congesRTT,nom,prenom,nationalite,adresse,age,sexe,situationFamiliale,tel,contrat,contratDuree_mois) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+ 
+       $req="INSERT INTO authentification(identifiant,mdp,fonction,congesPayes,congesRTT,nom,prenom,nationalite,adresse,age,sexe,situationFamiliale,tel,contrat,contratDuree_mois,CV) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
        $res= mysqli_prepare($connect ,$req);
-       $var= mysqli_stmt_bind_param($res,'sssiissssissssi',$identifiant,$mdp,$fonction,intval($congesPayes),intval($RTT),$nom,$prenom,$nationalite,$adresse,intval($age),$sexe,$situationFamiliale,$tel,$contrat,intval($contratDuree_mois));
+       $var= mysqli_stmt_bind_param($res,'sssiissssissssi',$identifiant,$mdp,$fonction,intval($congesPayes),intval($RTT),$nom,$prenom,$nationalite,$adresse,intval($age),$sexe,$situationFamiliale,$tel,$contrat,intval($contratDuree_mois),$CV);
        $var= mysqli_execute($res);
        mysqli_stmt_close($res);
     }
     mysqli_close($connect);
+    /*
     if($page){
         header("Location:http://localhost/projetSite_HTML/public_html/gestionProfil.php");
     }
     else{
         header("Location:http://localhost/projetSite_HTML/public_html/gestionSalarié.php");
     }
-    
+    */
     
     
 }

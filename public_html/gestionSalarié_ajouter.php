@@ -37,6 +37,12 @@ if ($erreur!=""){
         </nav>
 
          <form method="post" action="gestionSalarié_vérification.php">
+            <div class="CV">
+               <h2>CV</h2>
+               <label><nav><a href="http://localhost/projetSite_HTML/ajout_CV.php.php">Ajouter un CV</a></nav></label>
+               
+            </div>
+             
             <div class="EtatCivil">
                 <h2>Etat civil</h2>
                 
@@ -139,7 +145,6 @@ if ($erreur!=""){
                 <input type="date" name="embauche" id="idembauche"/>   
                 
                 <br><br>
-                
                 
             </div>
             <div>

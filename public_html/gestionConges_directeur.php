@@ -23,9 +23,8 @@
                 <img src="image\logo_esme.png"/>
             </figure>
             </br>
-            Demande de congé en attente de validation
+            <h1>Demande de congé en attente de validation</h1>
         </header>
-        <br>
         
       
 <?php 
@@ -47,14 +46,14 @@ else{echo "<input type='month' name='mois' min='2018-03'>";}
 echo "<input type='submit' name='ok' value='ok'>"
 
     ."<table border='1px solid black'>"
-    ."<td><label>Id congés</label></td>"
-    ."<td><label>Id salariés</label></td>"
-    ."<td><label>Type de congés</label></td>"
-    ."<td><label>Date demande de congés</label></td>"
-    ."<td><label>Date congé</label></td>"
-    ."<td><label>Nb de jour</label></td>"
-    ."<td><label>Etat</label></td>"
-    ."<td colspan='2'><label>Actions possibles</label></td>";
+    ."<th><label>Id congés</label></th>"
+    ."<th><label>Id salariés</label></th>"
+    ."<th><label>Type de congés</label></th>"
+    ."<th><label>Date demande de congés</label></th>"
+    ."<th><label>Date congé</label></th>"
+    ."<th><label>Nb de jour</label></th>"
+    ."<th><label>Etat</label></th>"
+    ."<th colspan='2'><label>Actions possibles</label></th>";
 $compt = 0;
 
 if($connect) {
@@ -111,11 +110,11 @@ function tableau($id,$personne,$type,$date_demande,$date_congé,$nbJour,$état, 
 //                              Tableau 2
 //==============================================================================
        
-echo '<br>'.'<br>'.'Tableau récapitulatif du nombres de jours de congé demandés'.'<br>'.'<br>';
+echo '<h1>Tableau récapitulatif du nombres de jours de congé demandés</h1>';
 
 $tab_id = array();
 echo "<table border='1px solid black'>"
-    ."<td><label> </label></td>";
+    ."<th><label> </label></th>";
 
 if($connect) {
     $req="SELECT id FROM authentification
@@ -130,14 +129,14 @@ if($connect) {
     else {
         while (mysqli_stmt_fetch($resultat)){
             array_push($tab_id, $id);
-            echo "<td><label>$id</label></td>";
+            echo "<th><label>$id</label></th>";
         }
     }
     mysqli_stmt_close($resultat);
 }
-echo "</tr>"."<td><label>Congés payés</label></td>";
+echo "</tr>"."<th><label>Congés payés</label></th>";
 tableau_2($tab_id,'CP');
-echo "</tr>"."<td><label>RTT</label></td>";
+echo "</tr>"."<th><label>RTT</label></th>";
 tableau_2($tab_id,'RTT');
 echo "</table>";
 

@@ -82,7 +82,7 @@ and open the template in the editor.
                 <th>Congés payés</th>
 <?php
                 if ($_SESSION['role']=='directeur'){
-                    echo "<th colspan=2>Opération</th>";
+                    echo "<th colspan=3>Opération</th>";
 
                 }
 ?>
@@ -102,12 +102,13 @@ and open the template in the editor.
                         if ($_SESSION['role']=='directeur'){
                             echo"<td><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_modifier.php?id=$personne[0]'>Modifier</a></td>";
                             echo"<td><input type='submit' value='supprimer' name='$personne[0]'></td>";
+                            echo"<td><a href='http://localhost/projetSite_HTML/public_html/consultationCV.php?id=$personne[0]'>Afficher CV</a></td>";
                         }
                     echo '</tr>';
             }
             if ($_SESSION['role']=='directeur'){
                 echo '<tr>';
-                echo"<td colspan='12'><a class='ajouter' href='http://localhost/projetSite_HTML/public_html/gestionSalarié_ajouter.php?id=0'>Ajouter</a></td>";
+                echo"<td colspan='13'><a class='ajouter' href='http://localhost/projetSite_HTML/public_html/gestionSalarié_ajouter.php?id=0'>Ajouter</a></td>";
                 echo '</tr>';
             }
 

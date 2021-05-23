@@ -8,7 +8,7 @@ $result = mysqli_prepare($connect,$req);
 $id=$_SESSION['id'];
 $var= mysqli_stmt_bind_param($result,'i', $id);
 $var=mysqli_execute($result);
-mysqli_stmt_bind_result($result,$id,$identifiant,$mdp,$nom,$prenom,$tel,$contrat,$situationFamiliale,$adresse,$age,$fonction,$embauche,$congesRTT,$congesPayes,$contratDuree_mois,$nationalite,$sexe);
+mysqli_stmt_bind_result($result,$id,$identifiant,$mdp,$nom,$prenom,$tel,$contrat,$situationFamiliale,$adresse,$age,$fonction,$embauche,$congesRTT,$congesPayes,$contratDuree_mois,$nationalite,$sexe,$CV);
 
 
 while (mysqli_stmt_fetch($result)){
