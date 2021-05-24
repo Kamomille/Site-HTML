@@ -30,13 +30,14 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- <link rel="stylesheet" href="gestionProfil.css"> -->
-        <link href="page.css" rel="stylesheet" type="text/css">
+        <link href="menu.css" rel="stylesheet" type="text/css">
     </head>
     <body>
 
         <header>
-            <img src="image\Esme_logo.png" class="esme">
-            <h1 class="titre">Gestion de congé</h1>
+            <img src="image\Esme_logo.png" class='esme'>     
+            <h1 class="accueil">Gestion des congés</h1>  
+            <img src="image\devise.jpg" class="devise">
         </header>
         <nav>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/menu.php">Menu</a>
@@ -45,7 +46,7 @@ and open the template in the editor.
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionProfil.php">Gestion de profil</a>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionSalari%C3%A9.php">Gestion de salariés</a>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php">Gestion de congé</a>
-            <a class="nav" href="http://localhost/projetSite_HTML/public_html/index.html">Déconnexion</a>
+            <a class="nav" href="http://localhost/projetSite_HTML/public_html/deconnexion.php">Déconnexion</a>
 
         </nav>
         <div class="mainLayout">
@@ -139,4 +140,14 @@ and open the template in the editor.
             
         </div>
     </body>
+    </br></br><footer>
+        <div class="footerinfo">
+            <h5>À PROPOS DE L'ESME SUDRIA</h5>
+            <p>Fondée en 1905, l’école d'ingénieurs ESME Sudria forme en 5 ans des ingénieurs pluridisciplinaires, prêts à relever les défis technologiques du XXIe siècle : la transition énergétique, les véhicules autonomes, la robotique, les réseaux intelligents, les villes connectées, la cyber sécurité, et les biotechnologies.Trois composantes font la modernité de sa pédagogie : l’importance de l’esprit d’innovation ; l’omniprésence du projet et de l’initiative ; une très large ouverture internationale, humaine et culturelle. Depuis sa création, près de 15 000 ingénieurs ont été diplômés. L'école délivre un diplôme reconnu par l'Etat et accrédité par la CTI.</p>
+        </div>
+        <ul>
+            <li>contact@esme.fr</li>
+            <li>01 56 20 62 00</li>
+        </ul>
+    </footer>
 </html>

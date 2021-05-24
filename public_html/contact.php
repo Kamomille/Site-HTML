@@ -23,17 +23,27 @@ if(isset($_COOKIE)){
         <link rel="stylesheet" href="gestionSalarié_modifier_ajouter.css">
     </head>
     <body>
+
         <header>
-            <figure>
-                <img src="image\logo_esme.png"/>
-            </figure>
-            <h1>Nouveau commentaire</h1>
+            <img src="image\Esme_logo.png" class='esme'>     
+            <h1 class="accueil">Gestion des congés</h1>  
+            <img src="image\devise.jpg" class="devise">
         </header>
+        <nav>
+            <a class="nav" href="http://localhost/projetSite_HTML/public_html/menu.php">Menu</a>
+            <a class="nav" href="http://localhost/projetSite_HTML/public_html/contact.php">Contact</a>
+            <a class="nav" href="http://localhost/projetSite_HTML/public_html/consultationCommentaire_salarie.php">Commentaire</a>
+            <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionProfil.php">Gestion de profil</a>
+            <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionSalari%C3%A9.php">Gestion de salariés</a>
+            <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php">Gestion de congé</a>
+            <a class="nav" href="http://localhost/projetSite_HTML/public_html/deconnexion.php">Déconnexion</a>
+
+        </nav>
         <br>
         <!-- -------------------------Formulaire---------------------------- -->
         <form action='contact_envoie.php' method="post">
             <div class="Contact">
-                <label><strong>situation familiale</strong></label>
+                <label><strong>Nouveau message</strong></label>
 
                 <br><br>
 

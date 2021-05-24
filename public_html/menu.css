@@ -4,9 +4,21 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 1 mars 2021, 19:51:11
+    Created on : 24 mai 2021, 21:59:53
     Author     : cedric
 */
+
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22 mars 2021, 17:35:30
+    Author     : cedric
+n
+*/
+
 header{
     display: flex;
     align-items: center;
@@ -15,6 +27,8 @@ header{
     background-color: #FFE4C4;
     font-size: 20px;
     text-align: center;
+ 
+    
 }
 
 img.devise{
@@ -28,22 +42,21 @@ img.esme{
   min-width:200px;
   min-height:100px;
 }
-body {
-    background-color: #FFFFF0;
-}
+
 nav{
     display: flex;
     justify-content: center;
     align-items: center;
+    position: sticky;
     top:0;
     font-size: 20px;
     background-color: #161616;
     opacity: 0.60;
-
+    padding-left: 200px;
     margin:0; 
 }
 
-a{
+a.nav{
     text-align: center;
     width: 200px;
     background: none;
@@ -53,45 +66,48 @@ a{
     text-decoration: initial;
     color: white;
 }
-
-a:hover{
+a.nav:hover{
     background-color: #6B9394;
 }
 
-div{
-    align-content: center;
-    margin: 100px;
-    border: thick ridge gray;
+
+footer{
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    background-color: #161616;
+    padding: 20px;
+}
+
+div.footerinfo{
+    width: 40vw;
+}
+
+body {
+    background-color: #FFFFF0;
+}
+table{
+    border-collapse: collapse;
+    margin-left: 40px;
     margin-right: 10px;
+    margin-top: 10px;
+}
+td{
+    width: 110px;
+    padding:  5px;
+    
+}
+tr{
+   background-color:#FFF7E2; 
+}
+tr:nth-child(2n){
+    background-color:#FFF7F2;
+}
+tr:hover{
+   background-color:#F7EFE2; 
+}
 
-}
-label{
-    margin: 20px;
-}
-input[type=text]{
-    border: none;
-    width:20vw;
+th{
+    background-color:#E0AA6A;
 }
 
-input:hover{
-    background-color: lightgray;
-}
-input.submit:hover{
-    background-color: greenyellow;
-}
-
-textarea{
-    margin: 10px;
-    width: 300px;
-    height: 150px;
-}
-input.submit{
-    background-color: lightgrey;
-    margin: 20px;
-    width: 150px;
-    height: 50px;
-}
-h2{
-    text-decoration: underline;
-    margin: 20px;
-}

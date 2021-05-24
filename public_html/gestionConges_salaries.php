@@ -13,9 +13,14 @@ if(isset($_COOKIE)){
         <meta charset="UTF-8">
         <meta name="Cédric Chhunon et Camille Bayon de Noyer" content="width=device-width, initial-scale=1.0">
         <link href="gestionSalarié_modifier_ajouter.css" rel="stylesheet" type="text/css">
-        <link href="page.css" rel="stylesheet" type="text/css">
+        <link href="menu.css" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <header>
+            <img src="image\Esme_logo.png" class='esme'>     
+            <h1 class="accueil">Gestion des congés</h1>  
+            <img src="image\devise.jpg" class="devise">
+        </header>
         <nav>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/menu.php">Menu</a>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/contact.php">Contact</a>
@@ -23,15 +28,10 @@ if(isset($_COOKIE)){
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionProfil.php">Gestion de profil</a>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionSalari%C3%A9.php">Gestion de salariés</a>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php">Gestion de congé</a>
-            <a class="nav" href="http://localhost/projetSite_HTML/public_html/index.html">Déconnexion</a>
+            <a class="nav" href="http://localhost/projetSite_HTML/public_html/deconnexion.php">Déconnexion</a>
 
         </nav>
-        <header>
-            <figure>
-                <img src="image\logo_esme.png"/>
-            </figure>
-            </br>
-        </header>
+        </br>
         
 <?php
 
@@ -66,12 +66,12 @@ $date_demande=date("Y-m-d");
 
         else{
             echo "<table border='1px solid black'>"
-                . "<td><label>Id congés</label></td>"
-                ."<td><label>Type de congés</label></td>"
-                ."<td><label>Date demande de congés</label></td>"
-                ."<td><label>Date congé</label></td>"
-                ."<td><label>Nb de jour</label></td>"
-                ."<td><label>Etat</label></td>";
+                . "<th><label>Id congés</label></th>"
+                ."<th><label>Type de congés</label></th>"
+                ."<th><label>Date demande de congés</label></th>"
+                ."<th><label>Date congé</label></th>"
+                ."<th><label>Nb de jour</label></th>"
+                ."<th><label>Etat</label></th>";
 
             while($ligne = mysqli_fetch_row($resultat)){
                 if ($id == $ligne[0]){
@@ -136,5 +136,16 @@ $date_demande=date("Y-m-d");
     
 ?>
 
-        </body>
+    </body>
+
+    </br></br><footer>
+        <div class="footerinfo">
+            <h5>À PROPOS DE L'ESME SUDRIA</h5>
+            <p>Fondée en 1905, l’école d'ingénieurs ESME Sudria forme en 5 ans des ingénieurs pluridisciplinaires, prêts à relever les défis technologiques du XXIe siècle : la transition énergétique, les véhicules autonomes, la robotique, les réseaux intelligents, les villes connectées, la cyber sécurité, et les biotechnologies.Trois composantes font la modernité de sa pédagogie : l’importance de l’esprit d’innovation ; l’omniprésence du projet et de l’initiative ; une très large ouverture internationale, humaine et culturelle. Depuis sa création, près de 15 000 ingénieurs ont été diplômés. L'école délivre un diplôme reconnu par l'Etat et accrédité par la CTI.</p>
+        </div>
+        <ul>
+            <li>contact@esme.fr</li>
+            <li>01 56 20 62 00</li>
+        </ul>
+    </footer>
 </html>
