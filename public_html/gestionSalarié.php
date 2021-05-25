@@ -52,6 +52,7 @@ and open the template in the editor.
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/deconnexion.php">Déconnexion</a>
 
         </nav>
+        </br></br></br>
         <?php
         
         $req="SELECT id,identifiant,nom,prenom,fonction,contrat,contratDuree_mois,embauche,congesRTT,congesPayes FROM authentification WHERE (fonction='enseignant' OR fonction='administration');";
@@ -107,7 +108,7 @@ and open the template in the editor.
                         if ($_SESSION['role']=='directeur'){
                             echo"<td><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_modifier.php?id=$personne[0]'>Modifier</a></td>";
                             echo"<td><input type='submit' value='supprimer' name='$personne[0]'></td>";
-                            echo"<td><a href='http://localhost/projetSite_HTML/public_html/consultationCV.php?id=$personne[0]' class='table'>Afficher CV</a></td>";
+                            echo"<td><a href='http://localhost/projetSite_HTML/public_html/CVcode/consultationCV.php?id=$personne[0]' class='table'>Afficher CV</a></td>";
                         }
                     echo '</tr>';
             }
@@ -122,6 +123,7 @@ and open the template in the editor.
 ?>
 
     </body>
+    </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
     </br></br><footer>
         <div class="footerinfo">
             <h5>À PROPOS DE L'ESME SUDRIA</h5>

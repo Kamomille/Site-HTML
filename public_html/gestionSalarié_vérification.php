@@ -89,12 +89,13 @@ else {
         $tel=strval($_POST['telephone']);
         $contrat=strval($_POST['contrat']);
         $contratDuree_mois=intval($_POST['contratDuree_mois']);
+        $CV=$file_name;
         
         $_SESSION['mdp']=$mdp;
         
-        $req="UPDATE authentification SET nom=?,prenom=?,nationalite=?,adresse=?,age=?,sexe=?,situationFamiliale=?,tel=?,contrat=?,contratDuree_mois=?,mdp=?  WHERE id=?;";
+        $req="UPDATE authentification SET nom=?,prenom=?,nationalite=?,adresse=?,age=?,sexe=?,situationFamiliale=?,tel=?,contrat=?,contratDuree_mois=?,mdp=?,CV=?  WHERE id=?;";
         $res= mysqli_prepare($connect, $req);
-        $var= mysqli_stmt_bind_param($res,'ssssissssisi',$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$mdp,$id);
+        $var= mysqli_stmt_bind_param($res,'ssssissssissi',$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$mdp,$CV,$id);
         $var= mysqli_execute($res);
         mysqli_stmt_close($res);       
         
@@ -127,7 +128,7 @@ else {
        $tel=$_POST['telephone'];
        $fonction=$_POST['fonction'];
        $contrat=$_POST['contrat'];
-       $CV=$_POST['image'];
+       $CV=$file_name;
        if($_POST["contrat"]=="CDD"){
            $contratDuree_mois=$_POST['contratDuree_mois'];
        }

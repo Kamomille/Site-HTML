@@ -1,0 +1,113 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 25 mai 2021, 22:40:14
+    Author     : Camille
+*/
+
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 24 mai 2021, 21:59:53
+    Author     : cedric
+*/
+
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22 mars 2021, 17:35:30
+    Author     : cedric
+n
+*/
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color : #FA8072;
+    background-color: #FFE4C4;
+    font-size: 20px;
+    text-align: center;
+}
+
+img.devise{
+  width:350px;
+  height:120px;
+}
+
+img.esme{
+  max-width:150px;
+  max-height:70px;
+  min-width:200px;
+  min-height:100px;
+}
+
+nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top:0;
+    font-size: 20px;
+    background-color: #161616;
+    opacity: 0.60;
+    padding-left: 200px;
+    margin:0; 
+}
+
+a.nav{
+    text-align: center;
+    width: 200px;
+    background: none;
+    height: max-content;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    text-decoration: initial;
+    color: white;
+}
+a.nav:hover{
+    background-color: #6B9394;
+}
+
+
+footer{
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    background-color: #161616;
+    padding: 20px;
+}
+
+div.footerinfo{
+    width: 40vw;
+}
+
+body {
+    background-color: #FFFFF0;
+}
+
+tr:nth-child(2n){
+    background-color:#FFF7F2;
+}
+tr:hover{
+   background-color:#F7EFE2; 
+}
+
+iframe {
+    border: 1px solid black;
+    width: 100%;
+    display: block;
+    vertical-align: middle;
+    align-content: center;
+    align-items: center;
+}
+

@@ -41,12 +41,10 @@ if ($erreur!=""){
          <form method="post" action="gestionSalarié_vérification.php"  enctype = "multipart/form-data">
 
              <div class="CV">
+                 <h2>CV</h2>
+                 <label ><strong>Ajouter un CV</strong> </label>
                  <input type = "file" name = "image" />
-                <ul>
-                   <li>nom: <?php echo $_FILES['image']['name'];  ?>
-                   <li>taille: <?php echo $_FILES['image']['size'];  ?>
-                   <li>type: <?php echo $_FILES['image']['type'] ?>
-                </ul>
+                 <br><br> 
             </div>
              
             <div class="EtatCivil">

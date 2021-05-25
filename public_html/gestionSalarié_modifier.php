@@ -42,18 +42,27 @@ if ($erreur!=""){
  <?php       
         if ($_GET['id']!=0 && $_GET['id']!=NULL){
            $id=intval($_GET['id']);
-           $req="SELECT nom,prenom,nationalite,adresse,age,sexe,situationFamiliale,tel,contrat,contratDuree_mois,id FROM authentification where id=?;";
+           $req="SELECT nom,prenom,nationalite,adresse,age,sexe,situationFamiliale,tel,contrat,contratDuree_mois,CV,id FROM authentification where id=?;";
            $res= mysqli_prepare($connect, $req);
            $var= mysqli_stmt_bind_param($res,'i',$id);
            $var= mysqli_execute($res); 
-           $var = mysqli_stmt_bind_result($res,$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$id);
+           $var = mysqli_stmt_bind_result($res,$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$CV,$id);
            mysqli_stmt_fetch($res);
            mysqli_stmt_close($res);
            $adresse= explode(",", $adresse);
         }
+        $_FILES['image']['name']=$CV;
 ?>
         
         <form method='post' action='gestionSalarié_vérification.php'>
+            <div class="CV">
+                 <h2>CV</h2>
+                 <label ><strong>Ajouter un CV</strong> </label>
+                 <input type = "file" name = "image" />
+                 <input type='text' value=<?php echo $CV; ?>>
+                 <br><br> 
+            </div>
+            
             <div class='EtatCivil'>
                <h2>Etat civil</h2>
                 
