@@ -6,7 +6,17 @@ include 'database.php';
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var_dump($_SESSION);
+var_dump($_FILES);
+   if(isset($_FILES['image'])){
+       $file_name = $_FILES['image']['name'];
+       $file_size = $_FILES['image']['size'];
+       $file_tmp = $_FILES['image']['tmp_name'];
+       $file_type = $_FILES['image']['type'];
+       $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
+       $path = "CV/".$file_name;
+       move_uploaded_file($file_tmp,$path);
+   }
+
 $erreur="";
 $check=false;
 $page=false;
@@ -117,7 +127,7 @@ else {
        $tel=$_POST['telephone'];
        $fonction=$_POST['fonction'];
        $contrat=$_POST['contrat'];
-       $CV=$_POST['CV'];
+       $CV=$_POST['image'];
        if($_POST["contrat"]=="CDD"){
            $contratDuree_mois=$_POST['contratDuree_mois'];
        }

@@ -32,52 +32,22 @@ if ($erreur!=""){
         </nav>
         <br>
         
-<!-- ============================================================================ -->
-<!--                                  Ajout CV                                    -->
-<!-- ============================================================================ -->
-<?php
-   //ini_set('display_errors','off');
-   if(isset($_FILES['image'])){
-       $file_name = $_FILES['image']['name'];
-       $file_size = $_FILES['image']['size'];
-       $file_tmp = $_FILES['image']['tmp_name'];
-       $file_type = $_FILES['image']['type'];
-       $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
-       $path = "CV/".$file_name;
-       move_uploaded_file($file_tmp,$path);
-   }
-?>
-<html>
-    <head>
-    <title>CV</title>
-    </head>
-    <body>
-    <h1>Ajouter un CV</h1>
-        <form action = "" method = "POST" enctype = "multipart/form-data">
-            <input type = "file" name = "image" />
-            <input type = "submit" onClick="test()"/>
-            <ul>
-               <li>nom: <?php echo $_FILES['image']['name'];  ?>
-               <li>taille: <?php echo $_FILES['image']['size'];  ?>
-               <li>type: <?php echo $_FILES['image']['type'] ?>
-            </ul>	
-        </form>
-   </body>
-</html>
 
 
 <!-- ============================================================================ -->
 <!--                                  Formulaire                                  -->
 <!-- ============================================================================ -->
 
-         <form method="post" action="gestionSalarié_vérification.php">
-             
-            <?php function test(){
-                echo 'aaaaaaaaaaaaa';
-                echo '<input type="text" name="CV" value=$file_name/>';
-            }?>
+         <form method="post" action="gestionSalarié_vérification.php"  enctype = "multipart/form-data">
 
-            
+             <div class="CV">
+                 <input type = "file" name = "image" />
+                <ul>
+                   <li>nom: <?php echo $_FILES['image']['name'];  ?>
+                   <li>taille: <?php echo $_FILES['image']['size'];  ?>
+                   <li>type: <?php echo $_FILES['image']['type'] ?>
+                </ul>
+            </div>
              
             <div class="EtatCivil">
                 <h2>Etat civil</h2>
