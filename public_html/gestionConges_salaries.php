@@ -35,7 +35,6 @@ if(isset($_COOKIE)){
         
 <?php
 
-
     include 'database.php';
 
 // ------------------------- Nombre de jours restant ---------------------------------
@@ -67,14 +66,21 @@ $date_demande=date("Y-m-d");
             ."<input type='date' name='date_fin' min='2018-03-01' value='$date_fin'>";
     }
     else {
-    echo "<input type='date' name='date_debut' min='2018-03-01'>"
-        ."<input type='date' name='date_fin' min='2018-03-01'>";
+        echo "<input type='date' name='date_debut' min='2018-03-01'>"
+            ."<input type='date' name='date_fin' min='2018-03-01'>";
     }
     echo "<input type='submit' name='ok' value='ok'>";
 
     if($connect) {
-        $req = 'SELECT personne, id, type, date_demande, date_congé, nbJour, état FROM congé';
-        $resultat = mysqli_query($connect, $req);
+        if (isset($_GET['date_debut'])&&isset($_GET['date_fin'])){ 
+            $req = "SELECT personne, id, type, date_demande, date_congé, nbJour, état FROM congé WHERE date_congé BETWEEN '$date_debut' AND '$date_fin'";
+            $resultat = mysqli_query($connect, $req);
+        }
+        else{
+            $req = 'SELECT personne, id, type, date_demande, date_congé, nbJour, état FROM congé';
+            $resultat = mysqli_query($connect, $req);
+        }
+
         if($resultat == false) echo "Echec de l'exécution de la requête";
 
         else{
@@ -98,11 +104,8 @@ $date_demande=date("Y-m-d");
                 }
             }
             echo "</tr>"."</table>".'<br>'.'<br>'.'<br>'.'<br>';
-
         }
-
     }
-
         
 // ----------------- Formulaire demande de congé ---------------------------------
         

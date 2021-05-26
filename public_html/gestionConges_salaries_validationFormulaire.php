@@ -13,7 +13,7 @@ include 'database.php';
 if (isset($_POST['ok'])){ 
     $date_debut =$_POST['date_debut'];
     $date_fin =$_POST['date_fin'];
-    header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php?date_debut=$date_debut?date_fin=$date_fin");
+    header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php?date_debut=$date_debut&date_fin=$date_fin");
 }
 
 if (isset($_POST['submit'])){ 
