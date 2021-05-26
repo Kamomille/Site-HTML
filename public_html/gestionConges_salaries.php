@@ -13,7 +13,7 @@ if(isset($_COOKIE)){
         <meta charset="UTF-8">
         <meta name="Cédric Chhunon et Camille Bayon de Noyer" content="width=device-width, initial-scale=1.0">
         <link href="gestionSalarié_modifier_ajouter.css" rel="stylesheet" type="text/css">
-        <link href="menu.css" rel="stylesheet" type="text/css">
+        <link href="page.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <header>
