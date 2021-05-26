@@ -10,26 +10,34 @@ session_start() ;
 include 'database.php';
 
 
-if($connect) {
-    $personne=$_SESSION['id'];
-    
-    $req="SELECT congesPayes,congesRTT FROM authentification WHERE id=3;";
-    $resultat = mysqli_prepare($connect,$req);
-    mysqli_stmt_bind_result($resultat,$congesPayes,$congesRTT);
-    $var= mysqli_execute($resultat);  
-
-    if($resultat == false) echo "Echec de l'exécution de la requête";
-    else {
-        while (mysqli_stmt_fetch($resultat)){
-            if ($congesPayes <= $_POST["nbJour"]) {
-                echo "<script>alert(\"Votre solde est pas suffisant.\")</script>";
-                //header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php");
-            }
-            else {conge_valide();}
-        }
-    }
-    mysqli_stmt_close($resultat);
+if (isset($_POST['ok'])){ 
+    $date_debut =$_POST['date_debut'];
+    $date_fin =$_POST['date_fin'];
+    header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php?date_debut=$date_debut?date_fin=$date_fin");
 }
+
+if (isset($_POST['submit'])){ 
+    if($connect) {
+        $personne=$_SESSION['id'];
+        $req="SELECT congesPayes,congesRTT FROM authentification WHERE id=3;";
+        $resultat = mysqli_prepare($connect,$req);
+        mysqli_stmt_bind_result($resultat,$congesPayes,$congesRTT);
+        $var= mysqli_execute($resultat);  
+
+        if($resultat == false) echo "Echec de l'exécution de la requête";
+        else {
+            while (mysqli_stmt_fetch($resultat)){
+                if ($congesPayes <= $_POST["nbJour"]) {
+                    echo "<script>alert(\"Votre solde est pas suffisant.\")</script>";
+                    //header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php");
+                }
+                else {conge_valide();}
+            }
+        }
+        mysqli_stmt_close($resultat);
+    }
+}
+
 
 function conge_valide(){
  include 'database.php';

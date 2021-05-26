@@ -58,6 +58,19 @@ $date_demande=date("Y-m-d");
 // ------------------------- Historique des demandes de congés ---------------------------------
 
     echo '<br>'.'<br>'.'<br>'.'Historique de vos demandes de congés'.'<br>'.'<br>';
+    echo "<form method='post' action='gestionConges_salaries_validationFormulaire.php'>";
+    
+    if (isset($_GET['date_debut'])&&isset($_GET['date_fin'])){ 
+        $date_debut=$_GET['date_debut'];
+        $date_fin=$_GET['date_fin'];
+        echo "<input type='date' name='date_debut'  min='2018-03-01' value='$date_debut'>"
+            ."<input type='date' name='date_fin' min='2018-03-01' value='$date_fin'>";
+    }
+    else {
+    echo "<input type='date' name='date_debut' min='2018-03-01'>"
+        ."<input type='date' name='date_fin' min='2018-03-01'>";
+    }
+    echo "<input type='submit' name='ok' value='ok'>";
 
     if($connect) {
         $req = 'SELECT personne, id, type, date_demande, date_congé, nbJour, état FROM congé';
@@ -95,8 +108,7 @@ $date_demande=date("Y-m-d");
         
     echo 'Formulaire pour ajouter une demande de congé'.'<br>'.'<br>';
         
-    echo "<form method='post' action='gestionConges_salaries_validationFormulaire.php'>"
-            ."<fieldset>"
+    echo "<fieldset>"
             ."<legend>Demande de congé</legend>"
             ."<table>"
             ."<tr>" 
@@ -114,9 +126,9 @@ $date_demande=date("Y-m-d");
             ."<tr>"
                 ."<td><label for='idRadio'>Type de congé  :</label></td>"
                 ."<td><label for='idRadio'>Congés payés</label>"
-                    ."<input type='radio' name='typeConges' value='CP' required/>"
+                    ."<input type='radio' name='typeConges' value='CP'/>"
                     ."<label for='idRadio'>RTT</label>"
-                    ."<input type='radio' name='typeConges' value='RTT' required/> </br></br></td>"
+                    ."<input type='radio' name='typeConges' value='RTT'/> </br></br></td>"
             ."</tr>"
             ."<tr>"
                 ."<td><label for='start'>Date de début de congé :</label></td>"
@@ -124,7 +136,7 @@ $date_demande=date("Y-m-d");
             ."<tr>"
             ."<tr>"
                 ."<td><label for='login'>Nombre de jours de congés :</label></td>"
-                ."<td><input type='text' id='nbJour' name='nbJour' required></td>"
+                ."<td><input type='text' id='nbJour' name='nbJour'></td>"
             ."<tr>"
 
             ."<tr>"
