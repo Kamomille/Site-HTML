@@ -39,9 +39,7 @@ if (isset($_POST['mdp'])){
     }
     
 }
-else {
-    $mdp=$_SESSION['mdp'];    
-}    
+
 
 
 if (strlen($_POST['prenom'])<2){
@@ -98,14 +96,23 @@ else {
         $contratDuree_mois=intval($_POST['contratDuree_mois']);
         //$CV=$file_name;
         
+        if(isset($mdp))
+        {
         $_SESSION['mdp']=$mdp;
-        
+        var_dump($mdp);
         $req="UPDATE authentification SET identifiant=?,nom=?,prenom=?,nationalite=?,adresse=?,age=?,sexe=?,situationFamiliale=?,tel=?,contrat=?,contratDuree_mois=?,mdp=?  WHERE id=?;";
         $res= mysqli_prepare($connect, $req);
         $var= mysqli_stmt_bind_param($res,'sssssissssisi',$identifiant,$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$mdp,$id);
         $var= mysqli_execute($res);
         mysqli_stmt_close($res);       
-        
+        }
+        else {
+        $req="UPDATE authentification SET identifiant=?,nom=?,prenom=?,nationalite=?,adresse=?,age=?,sexe=?,situationFamiliale=?,tel=?,contrat=?,contratDuree_mois=?  WHERE id=?;";
+        $res= mysqli_prepare($connect, $req);
+        $var= mysqli_stmt_bind_param($res,'sssssissssii',$identifiant,$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$id);
+        $var= mysqli_execute($res);
+        mysqli_stmt_close($res);                
+        }
     }
     else {
         $identifiant=$_POST["nom"].".".$_POST["prenom"]."@esme.com";;
