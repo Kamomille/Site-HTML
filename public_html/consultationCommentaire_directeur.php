@@ -38,7 +38,7 @@ and open the template in the editor.
     <body>
         <header>
             <img src="image\Esme_logo.png" class='esme'>     
-            <h1 class="accueil">Gestion des congés</h1>  
+            <h1 class="accueil">Gestion commentaire</h1>  
             <img src="image\devise.jpg" class="devise">
         </header>
         <nav>
@@ -51,6 +51,7 @@ and open the template in the editor.
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/deconnexion.php">Déconnexion</a>
 
         </nav>
+        </br></br>
 <?php
 
 
@@ -99,7 +100,7 @@ and open the template in the editor.
             
        
     
-
+    </br></br></br></br></br></br></br></br></br></br></br></br>
     </body>
     </br></br><footer>
         <div class="footerinfo">

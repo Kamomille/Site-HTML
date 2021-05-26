@@ -26,7 +26,7 @@ if(isset($_COOKIE)){
 
         <header>
             <img src="image\Esme_logo.png" class='esme'>     
-            <h1 class="accueil">Gestion des congés</h1>  
+            <h1 class="accueil">Contact</h1>  
             <img src="image\devise.jpg" class="devise">
         </header>
         <nav>
