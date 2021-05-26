@@ -14,6 +14,8 @@ if(isset($_COOKIE)){
     $_SESSION['nom']=$_COOKIE['nom'];
     $_SESSION['prenom']=$_COOKIE['prenom'];
 }
+$idDest=5;
+if(isset($_GET['id'])) $idDest=$_GET['id'];
 ?>
 <html>
     <head>
@@ -32,7 +34,7 @@ if(isset($_COOKIE)){
         <nav>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/menu.php">Menu</a>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/contact.php">Contact</a>
-            <a class="nav" href="http://localhost/projetSite_HTML/public_html/consultationCommentaire_salarie.php">Commentaire</a>
+            <a class="nav" href="http://localhost/projetSite_HTML/public_html/consultationCommentaire.php">Commentaire</a>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionProfil.php">Gestion de profil</a>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionSalari%C3%A9.php">Gestion de salariés</a>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php">Gestion de congé</a>
@@ -59,6 +61,13 @@ if(isset($_COOKIE)){
 
                 <br><br>
 
+                <label><strong>ID destiantaire</strong> </label>
+                <?php echo "<input type='text' value=$idDest name='destinataire' readonly ?>" ?>
+                </br><label>___________________________________________________________</label>
+
+
+                <br><br>
+
                 <label><strong>Objet</strong> </label>
                 <input type="text" name="objet"  placeholder="Objet" value="
                         <?php if (isset($_GET['obj'])){echo 'Commentaire demande de congé';}elseif ($_GET!=null) echo "RE: ".$_GET['objet']?>" required/>
@@ -71,7 +80,7 @@ if(isset($_COOKIE)){
 
             </div>
             <div>
-                <input type="submit" name="Envoyer" id="idsubmit" class="submit"/>
+                <input type="submit" value="Envoyer" name="$idDest" id="idsubmit" class="submit"/>
             </div>
         </form>
     </body>
