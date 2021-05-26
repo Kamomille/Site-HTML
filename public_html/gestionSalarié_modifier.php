@@ -1,14 +1,6 @@
 <?php 
     include 'database.php';
-?>
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<?php 
-       
+    
 $erreur="";
 foreach($_GET as $key =>$val){
     if ($val=="erreur") $erreur=$erreur.$key."," ;
@@ -20,7 +12,6 @@ if ($erreur!=""){
 ?>
 
 
-
 <html>
     <head>
         <meta charset="UTF-8">
@@ -28,18 +19,10 @@ if ($erreur!=""){
         <link rel="stylesheet" href="gestionSalarié_modifier_ajouter.css">
     </head>
     <body>
-        <nav>
-            <a href="http://localhost/projetSite_HTML/public_html/menu.php">Menu</a>
-            <a href="http://localhost/projetSite_HTML/public_html/contact.php">Contact</a>
-            <a href="http://localhost/projetSite_HTML/public_html/consultationCommentaire.php">Commentaire</a>
-            <a href="http://localhost/projetSite_HTML/public_html/gestionProfil.php">Gestion de profil</a>
-            <a href="http://localhost/projetSite_HTML/public_html/gestionSalari%C3%A9.php">Gestion de salariés</a>
-            <a href="http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php">Gestion de congé</a>
-            <a href="http://localhost/projetSite_HTML/public_html/index.html">Déconnexion</a>
 
-        </nav>
-
- <?php       
+ <?php    
+        include("haut_page.php");
+        
         if ($_GET['id']!=0 && $_GET['id']!=NULL){
            $id=intval($_GET['id']);
            $req="SELECT identifiant,nom,prenom,nationalite,adresse,age,sexe,situationFamiliale,tel,contrat,contratDuree_mois,CV,id FROM authentification where id=?;";
@@ -169,8 +152,5 @@ if ($erreur!=""){
                 <input type='submit' name=<?php echo $id; ?>  id='idsubmit' class='submit'/>
             </div>
         </form>
-        
-        
-        
     </body>
 </html>

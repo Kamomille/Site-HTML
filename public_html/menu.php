@@ -19,12 +19,6 @@ if(isset($_COOKIE)){
 
 ?>
 
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.pp
--->
 <html>
     
     <head>
@@ -42,12 +36,7 @@ and open the template in the editor.pp
         </header>
 
 
-        <nav>
-                <a class="nav" href=gestionProfil.php>Gestion Profil</a>
-                <a class="nav" href='contact.php'>Contacts</a>
-                <a class="nav" href='gestionSalarié.php'>Gestion Salariés</a>
-                <a class="nav" href='deconnexion.php'>Déconnexion</a>
-                <?php 
+    <?php include("haut_page.php");
 
     if (strcmp($_SESSION['fonction'], 'enseignant') == 0 || strcmp($_SESSION['fonction'], 'administration') == 0){
         echo "<a class='nav' href='consultationCommentaire.php'>Commentaire</a>";
@@ -66,16 +55,7 @@ and open the template in the editor.pp
 
                 ?>
             </nav>
-        </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+
+    <?php include("pied_de_page.php"); ?>
     </body>
-        </br></br><footer>
-        <div class="footerinfo">
-            <h5>À PROPOS DE L'ESME SUDRIA</h5>
-            <p>Fondée en 1905, l’école d'ingénieurs ESME Sudria forme en 5 ans des ingénieurs pluridisciplinaires, prêts à relever les défis technologiques du XXIe siècle : la transition énergétique, les véhicules autonomes, la robotique, les réseaux intelligents, les villes connectées, la cyber sécurité, et les biotechnologies.Trois composantes font la modernité de sa pédagogie : l’importance de l’esprit d’innovation ; l’omniprésence du projet et de l’initiative ; une très large ouverture internationale, humaine et culturelle. Depuis sa création, près de 15 000 ingénieurs ont été diplômés. L'école délivre un diplôme reconnu par l'Etat et accrédité par la CTI.</p>
-        </div>
-        <ul>
-            <li>contact@esme.fr</li>
-            <li>01 56 20 62 00</li>
-        </ul>
-    </footer>
 </html>

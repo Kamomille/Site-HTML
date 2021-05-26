@@ -1,11 +1,7 @@
 <?php
 session_start();
 include 'database.php';
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 var_dump($_FILES);
    if(isset($_FILES['image'])){
        $file_name = $_FILES['image']['name'];
@@ -78,7 +74,6 @@ if ($check){
             header("Location:http://localhost/projetSite_HTML/public_html/gestionSalarié_modifier.php?id=$id"."$erreur");
         }
     }
-    
 }
 else {
     if ($id!=0){
@@ -142,7 +137,7 @@ else {
        $tel=$_POST['telephone'];
        $fonction=$_POST['fonction'];
        $contrat=$_POST['contrat'];
-       $CV=$file_name;
+       //$CV=$file_name;
        if($_POST["contrat"]=="CDD"){
            $contratDuree_mois=$_POST['contratDuree_mois'];
        }
@@ -150,9 +145,9 @@ else {
            $contratDuree_mois=null;
         }
  
-       $req="INSERT INTO authentification(identifiant,mdp,fonction,congesPayes,congesRTT,nom,prenom,nationalite,adresse,age,sexe,situationFamiliale,tel,contrat,contratDuree_mois,CV) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+       $req="INSERT INTO authentification(identifiant,mdp,fonction,congesPayes,congesRTT,nom,prenom,nationalite,adresse,age,sexe,situationFamiliale,tel,contrat,contratDuree_mois) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
        $res= mysqli_prepare($connect ,$req);
-       $var= mysqli_stmt_bind_param($res,'sssiissssissssi',$identifiant,$mdp,$fonction,intval($congesPayes),intval($RTT),$nom,$prenom,$nationalite,$adresse,intval($age),$sexe,$situationFamiliale,$tel,$contrat,intval($contratDuree_mois),$CV);
+       $var= mysqli_stmt_bind_param($res,'sssiissssisssi',$identifiant,$mdp,$fonction,intval($congesPayes),intval($RTT),$nom,$prenom,$nationalite,$adresse,intval($age),$sexe,$situationFamiliale,$tel,$contrat,intval($contratDuree_mois));
        $var= mysqli_execute($res);
        mysqli_stmt_close($res);
     }

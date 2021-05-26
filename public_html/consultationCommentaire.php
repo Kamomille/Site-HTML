@@ -45,7 +45,7 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title></title>
-        <link href="menu.css" rel="stylesheet" type="text/css">
+        <link href="page.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <header>
@@ -53,19 +53,9 @@ and open the template in the editor.
             <h1 class="accueil">Gestion commentaire</h1>  
             <img src="image\devise.jpg" class="devise">
         </header>
-        <nav>
-            <a class="nav" href="http://localhost/projetSite_HTML/public_html/menu.php">Menu</a>
-            <a class="nav" href="http://localhost/projetSite_HTML/public_html/contact.php">Contact</a>
-            <a class="nav" href="http://localhost/projetSite_HTML/public_html/consultationCommentaire.php">Commentaire</a>
-            <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionProfil.php">Gestion de profil</a>
-            <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionSalari%C3%A9.php">Gestion de salariés</a>
-            <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php">Gestion de congé</a>
-            <a class="nav" href="http://localhost/projetSite_HTML/public_html/deconnexion.php">Déconnexion</a>
-
-        </nav>
-        </br></br></br>
+        
         <?php
-               
+        include("haut_page.php");
         
         $req="SELECT commentaire.id,personne,nom,prenom,identifiant,objet,message FROM commentaire JOIN authentification on authentification.id=personne WHERE(authentification.id=? OR destinataire=?) ORDER BY commentaire.id DESC;";
         $result = mysqli_prepare($connect,$req);
@@ -111,17 +101,7 @@ and open the template in the editor.
                 }
 ?>
                 </table>
-            </form>
-     </br></br></br></br></br></br></br></br></br></br></br></br>
+
+    <?php include("pied_de_page.php"); ?>
     </body>
-    </br></br><footer>
-        <div class="footerinfo">
-            <h5>À PROPOS DE L'ESME SUDRIA</h5>
-            <p>Fondée en 1905, l’école d'ingénieurs ESME Sudria forme en 5 ans des ingénieurs pluridisciplinaires, prêts à relever les défis technologiques du XXIe siècle : la transition énergétique, les véhicules autonomes, la robotique, les réseaux intelligents, les villes connectées, la cyber sécurité, et les biotechnologies.Trois composantes font la modernité de sa pédagogie : l’importance de l’esprit d’innovation ; l’omniprésence du projet et de l’initiative ; une très large ouverture internationale, humaine et culturelle. Depuis sa création, près de 15 000 ingénieurs ont été diplômés. L'école délivre un diplôme reconnu par l'Etat et accrédité par la CTI.</p>
-        </div>
-        <ul>
-            <li>contact@esme.fr</li>
-            <li>01 56 20 62 00</li>
-        </ul>
-    </footer>
 </html>

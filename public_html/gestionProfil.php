@@ -29,12 +29,7 @@ while (mysqli_stmt_fetch($result)){
 
 $entete=["Id : ","Identifiant : ","Mot de passe : ","Nom : ","Prénom : ","Age : ","nationalite : ","sexe","Situation familiale : ","Adresse postale : ","Téléphone : ","Contrat : ","Durée du contrat en mois : ","Fonction : ","Date d'embauche : ","congés RTT : ","congés Payés : "];
 ?>
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 
 <html>
     <head>
@@ -51,24 +46,9 @@ and open the template in the editor.
             <h1 class="accueil">Gestion de profil</h1>  
             <img src="image\devise.jpg" class="devise">
         </header>
-        <nav>
-            <a class="nav" href="http://localhost/projetSite_HTML/public_html/menu.php">Menu</a>
-            <a class="nav" href="http://localhost/projetSite_HTML/public_html/contact.php">Contact</a>
-            <a class="nav" href="http://localhost/projetSite_HTML/public_html/consultationCommentaire.php">Commentaire</a>
-            <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionProfil.php">Gestion de profil</a>
-            <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionSalari%C3%A9.php">Gestion de salariés</a>
-            <?php 
-            if (strcmp($_SESSION['fonction'], 'enseignant') == 0 || strcmp($_SESSION['fonction'], 'administration') == 0) {
-                echo '<a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php">Gestion de congé</a>';
-            }
-            if (strcmp($_SESSION['fonction'], 'directeur') == 0) {
-                echo '<a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php">Gestion de congé</a>';
-               
-            }
-            ?>
-            <a class="nav" href="http://localhost/projetSite_HTML/public_html/deconnexion.php">Déconnexion</a>
-
-        </nav>
+        
+        <?php include("haut_page.php"); ?>
+        
         <div class="mainLayout">
             <h1><?php echo $nom." ".$prenom ?>- Informations personnelles</h1>
             <table class="infoPerso">
@@ -154,20 +134,6 @@ and open the template in the editor.
         </div>
                 
 
-
-        
-        <div>
-            
-        </div>
+    <?php include("pied_de_page.php"); ?>
     </body>
-    </br></br><footer>
-        <div class="footerinfo">
-            <h5>À PROPOS DE L'ESME SUDRIA</h5>
-            <p>Fondée en 1905, l’école d'ingénieurs ESME Sudria forme en 5 ans des ingénieurs pluridisciplinaires, prêts à relever les défis technologiques du XXIe siècle : la transition énergétique, les véhicules autonomes, la robotique, les réseaux intelligents, les villes connectées, la cyber sécurité, et les biotechnologies.Trois composantes font la modernité de sa pédagogie : l’importance de l’esprit d’innovation ; l’omniprésence du projet et de l’initiative ; une très large ouverture internationale, humaine et culturelle. Depuis sa création, près de 15 000 ingénieurs ont été diplômés. L'école délivre un diplôme reconnu par l'Etat et accrédité par la CTI.</p>
-        </div>
-        <ul>
-            <li>contact@esme.fr</li>
-            <li>01 56 20 62 00</li>
-        </ul>
-    </footer>
 </html>
