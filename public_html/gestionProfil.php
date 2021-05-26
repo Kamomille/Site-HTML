@@ -1,7 +1,19 @@
-<?php 
+<?php
 session_start() ;
 include 'database.php';
 
+if(isset($_COOKIE)){
+    $_SESSION['id']=$_COOKIE['id'];
+    $_SESSION['identifiant']=$_COOKIE['identifiant'];
+    $_SESSION['mdp']=$_COOKIE['mdp'];
+    $_SESSION['fonction']=$_COOKIE['fonction'];
+    if($_SESSION['fonction']=='directeur'){
+        $_SESSION['role']='directeur';
+    }
+    else {
+        $_SESSION['role']='salarie';
+    }
+}
 
 $req="SELECT * FROM authentification WHERE id=?;";
 $result = mysqli_prepare($connect,$req);
@@ -36,7 +48,7 @@ and open the template in the editor.
 
         <header>
             <img src="image\Esme_logo.png" class='esme'>     
-            <h1 class="accueil">Gestion des congés</h1>  
+            <h1 class="accueil">Gestion de profil</h1>  
             <img src="image\devise.jpg" class="devise">
         </header>
         <nav>
@@ -45,7 +57,15 @@ and open the template in the editor.
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/consultationCommentaire_salarie.php">Commentaire</a>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionProfil.php">Gestion de profil</a>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionSalari%C3%A9.php">Gestion de salariés</a>
-            <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php">Gestion de congé</a>
+            <?php 
+            if (strcmp($_SESSION['fonction'], 'enseignant') == 0 || strcmp($_SESSION['fonction'], 'administration') == 0) {
+                echo '<a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php">Gestion de congé</a>';
+            }
+            if (strcmp($_SESSION['fonction'], 'directeur') == 0) {
+                echo '<a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php">Gestion de congé</a>';
+               
+            }
+            ?>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/deconnexion.php">Déconnexion</a>
 
         </nav>

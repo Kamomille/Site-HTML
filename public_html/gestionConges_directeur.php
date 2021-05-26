@@ -1,4 +1,19 @@
 
+<?php
+if(isset($_COOKIE)){
+    $_SESSION['id']=$_COOKIE['id'];
+    $_SESSION['identifiant']=$_COOKIE['identifiant'];
+    $_SESSION['mdp']=$_COOKIE['mdp'];
+    $_SESSION['fonction']=$_COOKIE['fonction'];
+    if($_SESSION['fonction']=='directeur'){
+        $_SESSION['role']='directeur';
+    }
+    else {
+        $_SESSION['role']='salarie';
+    }
+}
+?>
+
 <html>
     <head>
         <title>Demande de congé</title>
@@ -19,7 +34,15 @@
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/consultationCommentaire_salarie.php">Commentaire</a>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionProfil.php">Gestion de profil</a>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionSalari%C3%A9.php">Gestion de salariés</a>
-            <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php">Gestion de congé</a>
+            <?php 
+            if (strcmp($_SESSION['fonction'], 'enseignant') == 0 || strcmp($_SESSION['fonction'], 'administration') == 0) {
+                echo '<a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php">Gestion de congé</a>';
+            }
+            if (strcmp($_SESSION['fonction'], 'directeur') == 0) {
+                echo '<a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php">Gestion de congé</a>';
+               
+            }
+            ?>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/index.html">Déconnexion</a>
 
         </nav>
