@@ -56,9 +56,15 @@ if (!preg_match("#^([0-9]){5}$#",$_POST['codePostal'])){
 }
 
 
-if (preg_match("#^0[1-9][0-9]{5}$#",$_POST['telephone'] )){
+if (!preg_match("#^0[1-9][0-9]{6}$#",$_POST['telephone'] )){
     
     $erreur=$erreur."&tel=erreur";
+    $check=true;    
+}
+var_dump($_POST['identifiant']);
+if (!preg_match("#[A-Z a-z 0-9 _ - .]{2,}[@esme.fr]$#",$_POST['identifiant'] )){
+    echo 'oui';
+    $erreur=$erreur."&email=erreur";
     $check=true;    
 }
 
@@ -88,14 +94,15 @@ else {
         $situationFamiliale=$_POST['situationFamiliale'] ;
         $tel=strval($_POST['telephone']);
         $contrat=strval($_POST['contrat']);
+        $identifiant=strval($_POST['identifiant']);
         $contratDuree_mois=intval($_POST['contratDuree_mois']);
-        $CV=$file_name;
+        //$CV=$file_name;
         
         $_SESSION['mdp']=$mdp;
         
-        $req="UPDATE authentification SET nom=?,prenom=?,nationalite=?,adresse=?,age=?,sexe=?,situationFamiliale=?,tel=?,contrat=?,contratDuree_mois=?,mdp=?,CV=?  WHERE id=?;";
+        $req="UPDATE authentification SET identifiant=?,nom=?,prenom=?,nationalite=?,adresse=?,age=?,sexe=?,situationFamiliale=?,tel=?,contrat=?,contratDuree_mois=?,mdp=?  WHERE id=?;";
         $res= mysqli_prepare($connect, $req);
-        $var= mysqli_stmt_bind_param($res,'ssssissssissi',$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$mdp,$CV,$id);
+        $var= mysqli_stmt_bind_param($res,'sssssissssisi',$identifiant,$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$mdp,$id);
         $var= mysqli_execute($res);
         mysqli_stmt_close($res);       
         
@@ -143,14 +150,14 @@ else {
        mysqli_stmt_close($res);
     }
     mysqli_close($connect);
-    /*
+    
     if($page){
         header("Location:http://localhost/projetSite_HTML/public_html/gestionProfil.php");
     }
     else{
         header("Location:http://localhost/projetSite_HTML/public_html/gestionSalarié.php");
     }
-    */
+    
     
     
 }

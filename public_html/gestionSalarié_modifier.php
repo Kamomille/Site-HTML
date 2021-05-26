@@ -31,7 +31,7 @@ if ($erreur!=""){
         <nav>
             <a href="http://localhost/projetSite_HTML/public_html/menu.php">Menu</a>
             <a href="http://localhost/projetSite_HTML/public_html/contact.php">Contact</a>
-            <a href="http://localhost/projetSite_HTML/public_html/consultationCommentaire_salarie.php">Commentaire</a>
+            <a href="http://localhost/projetSite_HTML/public_html/consultationCommentaire.php">Commentaire</a>
             <a href="http://localhost/projetSite_HTML/public_html/gestionProfil.php">Gestion de profil</a>
             <a href="http://localhost/projetSite_HTML/public_html/gestionSalari%C3%A9.php">Gestion de salariés</a>
             <a href="http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php">Gestion de congé</a>
@@ -42,11 +42,11 @@ if ($erreur!=""){
  <?php       
         if ($_GET['id']!=0 && $_GET['id']!=NULL){
            $id=intval($_GET['id']);
-           $req="SELECT nom,prenom,nationalite,adresse,age,sexe,situationFamiliale,tel,contrat,contratDuree_mois,CV,id FROM authentification where id=?;";
+           $req="SELECT identifiant,nom,prenom,nationalite,adresse,age,sexe,situationFamiliale,tel,contrat,contratDuree_mois,CV,id FROM authentification where id=?;";
            $res= mysqli_prepare($connect, $req);
            $var= mysqli_stmt_bind_param($res,'i',$id);
            $var= mysqli_execute($res); 
-           $var = mysqli_stmt_bind_result($res,$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$CV,$id);
+           $var = mysqli_stmt_bind_result($res,$identifiant,$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$CV,$id);
            mysqli_stmt_fetch($res);
            mysqli_stmt_close($res);
            $adresse= explode(",", $adresse);
@@ -123,6 +123,11 @@ if ($erreur!=""){
 
                 <br><br>   
 
+                <label for='idtéléphone'><strong>Adresse mail</strong> </label>
+                <input type='text' name='identifiant' placeholder='cedric.chhuon@esme.fr' value=<?php echo $identifiant; ?> required>
+                </br><label for='idLine'>___________________________________________________________</label>
+
+                <br><br>   
                 <label><strong>Adresse postale</strong> </label>
                 </br></br><label><strong>Code postale</strong> </label>
                 <input type='text' name='codePostal' placeholder='94200' value=<?php echo $adresse[0]; ?>  >  
