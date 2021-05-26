@@ -31,7 +31,7 @@ and open the template in the editor.pp
         <title>Esme gestion congé</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="menu.css" rel="stylesheet" type="text/css">
+        <link href="page.css" rel="stylesheet" type="text/css">
     </head>
     
     <body>
@@ -43,26 +43,26 @@ and open the template in the editor.pp
 
 
         <nav>
-                <a href=gestionProfil.php>Gestion Profil</a>
-                <a href='contact.php'>Contacts</a>
-                <a href='gestionSalarié.php'>Gestion Salariés</a>
-                <a href='deconnexion.php'>Déconnexion</a>
+                <a class="nav" href=gestionProfil.php>Gestion Profil</a>
+                <a class="nav" href='contact.php'>Contacts</a>
+                <a class="nav" href='gestionSalarié.php'>Gestion Salariés</a>
+                <a class="nav" href='deconnexion.php'>Déconnexion</a>
                 <?php 
 
     if (strcmp($_SESSION['fonction'], 'enseignant') == 0 || strcmp($_SESSION['fonction'], 'administration') == 0){
-        echo "<a href='consultationCommentaire_salarie.php'>Commentaire</a>";
+        echo "<a class='nav' href='consultationCommentaire.php'>Commentaire</a>";
     }
     else {
-        echo "<a href='consultationCommentaire_directeur.php'>Commentaires</a>";
+        echo "<a class='nav' href='consultationCommentaire.php'>Commentaires</a>";
     }
 
     if (strcmp($_SESSION['fonction'], 'enseignant') == 0 || strcmp($_SESSION['fonction'], 'administration') == 0) {
-        echo "<a href='gestionConges_salaries.php'>Gestion Congés</a>";
+        echo "<a class='nav' href='gestionConges_salaries.php'>Gestion Congés</a>";
     }
     if (strcmp($_SESSION['fonction'], 'directeur') == 0) {
-        echo "<a href='gestionConges_directeur.php'>Gestion Congés</a>";
+        echo "<a class='nav' href='gestionConges_directeur.php'>Gestion Congés</a>";
     }
-    echo "<a href='ajout_CV.php'>test ajout CV</a>";
+    echo "<a class='nav' href='ajout_CV.php'>test ajout CV</a>";
 
                 ?>
             </nav>
