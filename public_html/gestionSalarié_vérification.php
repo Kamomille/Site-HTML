@@ -16,6 +16,7 @@ var_dump($_FILES);
 $erreur="";
 $check=false;
 $page=false;
+$id=0;
 foreach ( $_POST as $key => $val)
     if ($val=="Envoyer"){
         $id=$key;
@@ -154,14 +155,14 @@ else {
        mysqli_stmt_close($res);
     }
     mysqli_close($connect);
-    /*
+    
     if($page){
         header("Location:http://localhost/projetSite_HTML/public_html/gestionProfil.php");
     }
     else{
         header("Location:http://localhost/projetSite_HTML/public_html/gestionSalarié.php");
     }
-    */
+    
     
     
 }

@@ -15,11 +15,25 @@
         
         if ($check==true){
             foreach ($_POST as $key => $val){
+                
+                $req="DELETE FROM commentaire WHERE (personne=? OR destinataire=?)";
+                $res= mysqli_prepare($connect, $req);
+                $var= mysqli_stmt_bind_param($res,'ii', $key,$key);
+                $var= mysqli_execute($res); 
+                mysqli_stmt_close($res);
+                
+                $req="DELETE FROM congé WHERE personne=?";
+                $res= mysqli_prepare($connect, $req);
+                $var= mysqli_stmt_bind_param($res,'i', $key);
+                $var= mysqli_execute($res); 
+                mysqli_stmt_close($res);
+                
                 $req="DELETE FROM authentification WHERE id=?";
                 $res= mysqli_prepare($connect, $req);
                 $var= mysqli_stmt_bind_param($res,'i', $key);
                 $var= mysqli_execute($res); 
                 mysqli_stmt_close($res);
+            
             }
         }
         

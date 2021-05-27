@@ -2,7 +2,7 @@
     session_start();
     include 'database.php';
     $check=false;
-
+    var_dump($_POST);
     if ($_POST!=NULL){
         
         foreach ($_POST as $key => $val){
@@ -14,9 +14,9 @@
         
         if ($check==true){
             foreach ($_POST as $key => $val){
-                $req="DELETE FROM commentaire WHERE personne=?";
+                $req="DELETE FROM commentaire WHERE id=?";
                 $res= mysqli_prepare($connect, $req);
-                $var= mysqli_stmt_bind_param($res,'s', $key);
+                $var= mysqli_stmt_bind_param($res,'i', $key);
                 $var= mysqli_execute($res); 
                 mysqli_stmt_close($res);
                 
@@ -90,7 +90,7 @@ and open the template in the editor.
 <?php 
                     foreach($res as $commentaire){
 
-                        echo '<tr>';
+                        echo '<tr class="">';
                         echo "<td><input type='checkbox' name='$commentaire[0]' value='$commentaire[0]'</td>";
                             for($i=1;$i<sizeof($commentaire);$i++){
                                 echo "<td>$commentaire[$i]</td>";
