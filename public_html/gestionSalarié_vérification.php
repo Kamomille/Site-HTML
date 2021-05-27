@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'database.php';
-
+/*
 var_dump($_FILES);
    if(isset($_FILES['image'])){
        $file_name = $_FILES['image']['name'];
@@ -12,7 +12,7 @@ var_dump($_FILES);
        $path = "CV/".$file_name;
        move_uploaded_file($file_tmp,$path);
    }
-
+*/
 $erreur="";
 $check=false;
 $page=false;
@@ -146,22 +146,22 @@ else {
         else {
            $contratDuree_mois=null;
         }
- 
-       $req="INSERT INTO authentification(identifiant,mdp,fonction,congesPayes,congesRTT,nom,prenom,nationalite,adresse,age,sexe,situationFamiliale,tel,contrat,contratDuree_mois) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+       
+       $req="INSERT INTO authentification(identifiant,mdp,fonction,congesPayes,congesRTT,nom,prenom,nationalite,adresse,age,sexe,situationFamiliale,tel,contrat,contratDuree_mois) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
        $res= mysqli_prepare($connect ,$req);
-       $var= mysqli_stmt_bind_param($res,'sssiissssisssi',$identifiant,$mdp,$fonction,intval($congesPayes),intval($RTT),$nom,$prenom,$nationalite,$adresse,intval($age),$sexe,$situationFamiliale,$tel,$contrat,intval($contratDuree_mois));
+       $var= mysqli_stmt_bind_param($res,'sssiissssissssi',$identifiant,$mdp,$fonction,intval($congesPayes),intval($RTT),$nom,$prenom,$nationalite,$adresse,intval($age),$sexe,$situationFamiliale,$tel,$contrat,intval($contratDuree_mois));
        $var= mysqli_execute($res);
        mysqli_stmt_close($res);
     }
     mysqli_close($connect);
-    
+    /*
     if($page){
         header("Location:http://localhost/projetSite_HTML/public_html/gestionProfil.php");
     }
     else{
         header("Location:http://localhost/projetSite_HTML/public_html/gestionSalarié.php");
     }
-    
+    */
     
     
 }

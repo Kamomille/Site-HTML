@@ -9,8 +9,8 @@
        $file_tmp = $_FILES['image']['tmp_name'];
        $file_type = $_FILES['image']['type'];
        $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
-        $path = "CV/".$file_name;
-        move_uploaded_file($file_tmp,$path);
+       $path = "CV/".$file_name;
+       move_uploaded_file($file_tmp,$path);
 
    }
 ?>
