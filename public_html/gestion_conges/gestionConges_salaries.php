@@ -82,13 +82,13 @@ $date_demande=date("Y-m-d");
 
             while($ligne = mysqli_fetch_row($resultat)){
                 if ($id == $ligne[0]){
-                    echo "<tr>" 
-                        ."<td><label>$ligne[1]</label></td>"
-                        ."<td><label>$ligne[2]</label></td>"
-                        ."<td><label>$ligne[3]</label></td>"
-                        ."<td><label>$ligne[4]</label></td>"
-                        ."<td><label>$ligne[5]</label></td>"
-                        ."<td><label>$ligne[6]</label></td>";
+                    echo "<tr class='table'>" 
+                        ."<td class='table'><label>$ligne[1]</label></td>"
+                        ."<td class='table'><label>$ligne[2]</label></td>"
+                        ."<td class='table'><label>$ligne[3]</label></td>"
+                        ."<td class='table'><label>$ligne[4]</label></td>"
+                        ."<td class='table'><label>$ligne[5]</label></td>"
+                        ."<td class='table'><label>$ligne[6]</label></td>";
                 }
             }
             echo "</tr>"."</table>".'<br>'.'<br>'.'<br>'.'<br>';

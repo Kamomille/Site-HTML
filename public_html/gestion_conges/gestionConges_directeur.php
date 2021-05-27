@@ -84,13 +84,13 @@ if($connect) {
 }
 
 function tableau($id,$personne,$type,$date_demande,$date_congé,$nbJour,$état, $numBouton_validé, $numBouton_refuser, $numBouton_commentaire) {
-    echo "<tr>" 
-        ."<td><label>$id</label></td>"
-        ."<td><label>$personne</label></td>"
-        ."<td><label>$type</label></td>"
-        ."<td><label>$date_demande</label></td>"
-        ."<td><label>$date_congé</label></td>"
-        ."<td><label>$nbJour</label></td>";
+    echo "<tr class='table'>" 
+        ."<td class='table'><label>$id</label></td>"
+        ."<td class='table'><label>$personne</label></td>"
+        ."<td class='table'><label>$type</label></td>"
+        ."<td class='table'><label>$date_demande</label></td>"
+        ."<td class='table'><label>$date_congé</label></td>"
+        ."<td class='table'><label>$nbJour</label></td>";
     if ($état == ""){
         echo "<td><label>$état</label></td>"
         . "<td><input type='submit' value='Valider le congé' name='$numBouton_validé' /></td>"
@@ -137,7 +137,7 @@ if($connect) {
     }
     mysqli_stmt_close($resultat);
 }
-echo "</tr>"."<th><label>Congés payés</label></th>";
+echo "<tr  class='table'>"."<th><label>Congés payés</label></th>";
 tableau_2($tab_id,'CP');
 echo "</tr>"."<th><label>RTT</label></th>";
 tableau_2($tab_id,'RTT');
@@ -154,15 +154,15 @@ function tableau_2($tab_id,$type_de_congé){
             $var= mysqli_execute($resultat);  
             if($resultat == false) echo "Echec de l'exécution de la requête";
             else {
-                echo '<td><label>';
+                echo '<td  class="table"><label>';
                 echo "<table>";
                 while (mysqli_stmt_fetch($resultat)){
                     if (strcmp($type, $type_de_congé) == 0){
-                        if ($état == ""){echo "<td><label>$nbJour</label></td>";}
-                        if ($état == "Refusé"){echo "<td bgcolor='red'><label>$nbJour</label></td>";}
-                        if ($état == "Validé"){echo "<td bgcolor='green'><label>$nbJour</label></td>";}
+                        if ($état == ""){echo "<td  class='table'><label>$nbJour</label></td>";}
+                        if ($état == "Refusé"){echo "<td bgcolor='red'  class='table'><label>$nbJour</label></td>";}
+                        if ($état == "Validé"){echo "<td bgcolor='green'  class='table'><label>$nbJour</label></td>";}
                     }
-                    else {echo "<td><label> </label></td>";}
+                    else {echo "<td  class='table'><label> </label></td>";}
                 }
                 echo "</table>"."</label></td>";
             }

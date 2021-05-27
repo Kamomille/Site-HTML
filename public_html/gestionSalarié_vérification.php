@@ -34,6 +34,13 @@ if (isset($_POST['mdp'])){
     $check=true;   
     }
     
+    if (!preg_match("#[A-Z a-z 0-9 _ - .]{2,}[@esme.fr]$#",$_POST['identifiant'] )){
+        
+        $erreur=$erreur."&email=erreur";
+        $check=true;    
+    }
+
+    
 }
 
 
@@ -55,12 +62,7 @@ if (!preg_match("#^0[1-9][0-9]{6}$#",$_POST['telephone'] )){
     $erreur=$erreur."&tel=erreur";
     $check=true;    
 }
-var_dump($_POST['identifiant']);
-if (!preg_match("#[A-Z a-z 0-9 _ - .]{2,}[@esme.fr]$#",$_POST['identifiant'] )){
-    echo 'oui';
-    $erreur=$erreur."&email=erreur";
-    $check=true;    
-}
+
 
 if ($check){
     if($page){
