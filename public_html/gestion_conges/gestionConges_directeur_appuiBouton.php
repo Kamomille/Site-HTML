@@ -16,7 +16,9 @@ if($connect) {
    
     else{
         $compt = 0;
+        
         while($ligne =mysqli_fetch_row($resultat)){
+            
             $compt += 1;
             $numBouton_validé = "valider_" . "$compt";
             $numBouton_refuser = "refuser_" . "$compt";
@@ -29,12 +31,15 @@ if($connect) {
                 $req = "update congé set état = 'Validé' where id = $compt";
                 $resultat = mysqli_query($connect, $req);
                 reperage($compt);
+                /*
                 if (isset($_POST['mois'])){
                     $date =$_POST['mois'];
                     header("Location:http://localhost/projetSite_HTML/public_html/gestion_conges/gestionConges_directeur.php?date=$date");
                     }
                 else {header("Location:http://localhost/projetSite_HTML/public_html/gestion_conges/gestionConges_directeur.php");}
                 break;
+                 
+                 */
             }
             
             // ------------------ Refuser un congé --------------------------
@@ -62,10 +67,10 @@ if($connect) {
 mysqli_close($connect);
 
 
-function reperage($id_congé){
+function reperage($id_conge){
     include '..\database.php';
     if($connect) {
-        $req="SELECT personne,nbJour,type FROM congé WHERE id=$id_congé;";
+        $req="SELECT personne,nbJour,type FROM congé WHERE id=$id_conge;";
         $resultat = mysqli_prepare($connect,$req);
         mysqli_stmt_bind_result($resultat,$personne,$nbJour,$type);
         $var= mysqli_execute($resultat);
@@ -93,16 +98,19 @@ function reperage($id_congé){
     }
     include '..\database.php';
     if($connect) {
+        
         if (strcmp($type,'CP') == 0){
+            
             $new = $congesPayes - $nbJour;
-            $req = "update authentification set $congesPayes=$new  where id=$personne";
+            $req = "update authentification set congesPayes=$new  where id=$personne";
             $resultat = mysqli_query($connect, $req);
         }
     }
     if($connect) {
         if (strcmp($type,'RTT') == 0){
             $new = $congesRTT - $nbJour;
-            $req = "update authentification set $congesRTT=$new  where id=$personne";
+
+            $req = "update authentification set congesRTT=$new  where id=$personne";
             $resultat = mysqli_query($connect, $req);
         }
     }
