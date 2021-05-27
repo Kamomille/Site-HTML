@@ -109,7 +109,7 @@
                         echo "<td class='table'><input type='checkbox' name='$personne[0]' value='$personne[0]'</td>";
                     }
                         for($i=0;$i<sizeof($personne);$i++){
-                            echo "<td>$personne[$i]</td>";
+                            echo "<td  class='table'>$personne[$i]</td>";
                         }
                         if ($_SESSION['role']=='directeur'){
                             echo"<td class='table'><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_modifier.php?id=$personne[0]'>Modifier</a></td>";
@@ -120,7 +120,7 @@
             }
             if ($_SESSION['role']=='directeur'){
                 echo '<tr>';
-                echo"<td colspan='13' class='table'><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_ajouter.php?id=0' class='table'>Ajouter</a></td>";
+                echo"<td colspan='14' class='table'><a href='http://localhost/projetSite_HTML/public_html/gestionSalarié_ajouter.php?id=0' class='table'>Ajouter</a></td>";
                 echo '</tr>';
             }
 
