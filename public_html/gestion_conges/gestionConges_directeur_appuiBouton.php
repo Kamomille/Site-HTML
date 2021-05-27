@@ -31,15 +31,12 @@ if($connect) {
                 $req = "update congé set état = 'Validé' where id = $compt";
                 $resultat = mysqli_query($connect, $req);
                 reperage($compt);
-                /*
                 if (isset($_POST['mois'])){
                     $date =$_POST['mois'];
                     header("Location:http://localhost/projetSite_HTML/public_html/gestion_conges/gestionConges_directeur.php?date=$date");
                     }
                 else {header("Location:http://localhost/projetSite_HTML/public_html/gestion_conges/gestionConges_directeur.php");}
                 break;
-                 
-                 */
             }
             
             // ------------------ Refuser un congé --------------------------
@@ -100,19 +97,56 @@ function reperage($id_conge){
     if($connect) {
         
         if (strcmp($type,'CP') == 0){
-            
             $new = $congesPayes - $nbJour;
             $req = "update authentification set congesPayes=$new  where id=$personne";
             $resultat = mysqli_query($connect, $req);
+            
+            // correction si employer spam demande de congé
+            $req="SELECT nbJour, id FROM congé WHERE personne=$personne and type='CP' and état='';";
+            $resultat = mysqli_prepare($connect,$req);
+            mysqli_stmt_bind_result($resultat,$nbJour,$id);
+            $var= mysqli_execute($resultat);
+            if($resultat == false) echo "Echec de l'exécution de la requête";
+            else {
+                while (mysqli_stmt_fetch($resultat)){
+                    if ($nbJour > $new){
+                        correction ($nbJour,$new,$id);
+                    }
+                }
+            }
         }
     }
     if($connect) {
+        
         if (strcmp($type,'RTT') == 0){
             $new = $congesRTT - $nbJour;
-
             $req = "update authentification set congesRTT=$new  where id=$personne";
             $resultat = mysqli_query($connect, $req);
+            
+            // correction si employer spam demande de congé
+            $req="SELECT nbJour, id FROM congé WHERE personne=$personne and type='RTT' and état='';";
+            $resultat = mysqli_prepare($connect,$req);
+            mysqli_stmt_bind_result($resultat,$nbJour,$id);
+            $var= mysqli_execute($resultat);
+            if($resultat == false) echo "Echec de l'exécution de la requête";
+            else {
+                while (mysqli_stmt_fetch($resultat)){
+                    if ($nbJour > $new){
+                        correction ($nbJour,$new,$id);
+                    }
+                }
+            }
+
         }
+    }
+}
+
+
+function correction ($nbJour,$new,$id){
+    include '..\database.php';
+    if($connect) {
+        $req = "update congé set état='Refusé' where id=$id";
+        $resultat = mysqli_query($connect, $req);
     }
 }
             /*
