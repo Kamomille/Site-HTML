@@ -27,6 +27,22 @@ if(isset($_COOKIE)){
 
 // ------------------------- Nombre de jours restant ---------------------------------
     
+    
+    if($connect) {
+        $req="SELECT congesRTT, congesPayes FROM authentification WHERE id=$id;";
+        $resultat = mysqli_prepare($connect,$req);
+        mysqli_stmt_bind_result($resultat,$congesRTT,$congesPayes);
+        $var= mysqli_execute($resultat);  
+        if($resultat == false) echo "Echec de l'exécution de la requête";
+        else {
+            while (mysqli_stmt_fetch($resultat)){
+                echo 'Nombre de RTT restant : '.$congesRTT.'<br>';
+                echo 'Nombre de congés payés restant : '.$congesPayes.'<br>';
+            }
+        }
+        mysqli_stmt_close($resultat);
+    }
+    /*
     if($connect) {
         $req = 'SELECT id, congesRTT, congesPayes FROM authentification';
         $resultat = mysqli_query($connect, $req);
@@ -39,7 +55,7 @@ if(isset($_COOKIE)){
                 }
             }
         }  
-    }
+    }*/
 $date_demande=date("Y-m-d");
     
 // ------------------------- Historique des demandes de congés ---------------------------------
@@ -127,7 +143,7 @@ $date_demande=date("Y-m-d");
             ."<tr>"
             ."<tr>"
                 ."<td><label for='login'>Nombre de jours de congés :</label></td>"
-                ."<td><input type='text' id='nbJour' name='nbJour'></td>"
+                ."<td><input type='text' id='nbJour_demande' name='nbJour_demande'></td>"
             ."<tr>"
 
             ."<tr>"
@@ -136,7 +152,7 @@ $date_demande=date("Y-m-d");
 
             ."</table>"
         ."</fieldset>"
-    
+    ."</form>";
 ?>
     <?php include("..\pied_de_page.php"); ?>
     </body>

@@ -18,19 +18,36 @@ if (isset($_POST['ok'])){
 
 if (isset($_POST['submit'])){ 
     if($connect) {
-        $personne=$_SESSION['id'];
-        $req="SELECT congesPayes,congesRTT FROM authentification WHERE id=$personne;";
-        $resultat = mysqli_prepare($connect,$req);
-        mysqli_stmt_bind_result($resultat,$congesPayes,$congesRTT);
-        $var= mysqli_execute($resultat);  
-
-        if($resultat == false) echo "Echec de l'exécution de la requête";
-        else {
-            while (mysqli_stmt_fetch($resultat)){
-                if ($congesPayes <= $_POST["nbJour"]) {
-                    echo "<script>alert(\"Votre solde est pas suffisant.\")</script>";
+        if (strcmp($_POST['typeConges'],'RTT') == 0) {
+            $personne=$_SESSION['id'];
+            $req="SELECT congesRTT FROM authentification WHERE id=$personne;";
+            $resultat = mysqli_prepare($connect,$req);
+            mysqli_stmt_bind_result($resultat,$congesRTT);
+            $var= mysqli_execute($resultat); 
+            if($resultat == false) echo "Echec de l'exécution de la requête";
+            else {
+                while (mysqli_stmt_fetch($resultat)){
+                    if ($congesPayes < $_POST["nbJour_demande"]) {
+                        echo "<script>alert(\"Votre solde est pas suffisant.\")</script>";
+                    }
+                    else {conge_valide();}
                 }
-                else {conge_valide();}
+            }
+        }
+        if (strcmp($_POST['typeConges'],'CP') == 0) {
+            $personne=$_SESSION['id'];
+            $req="SELECT congesPayes FROM authentification WHERE id=$personne;";
+            $resultat = mysqli_prepare($connect,$req);
+            mysqli_stmt_bind_result($resultat,$congesPayes);
+            $var= mysqli_execute($resultat); 
+            if($resultat == false) echo "Echec de l'exécution de la requête";
+            else {
+                while (mysqli_stmt_fetch($resultat)){
+                    if ($congesPayes < $_POST["nbJour_demande"]) {
+                        echo "<script>alert(\"Votre solde est pas suffisant.\")</script>";
+                    }
+                    else {conge_valide();}
+                }
             }
         }
         mysqli_stmt_close($resultat);
@@ -43,7 +60,7 @@ function conge_valide(){
         $personne=$_SESSION['id'];
         $date_demande=date("Y-m-d");
         $date_congé=$_POST['date_congé'];
-        $nbJour=$_POST['nbJour'];
+        $nbJour=$_POST['nbJour_demande'];
         $type=$_POST['typeConges'];
         $état='';
 
