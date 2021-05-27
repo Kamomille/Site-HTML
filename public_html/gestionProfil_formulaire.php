@@ -41,7 +41,14 @@ and open the template in the editor.
     <body>
         <?php include("haut_page.php");?>
         
-        <form method='post' action='gestionSalarié_vérification.php'>
+        <form method='post' action='gestionSalarié_vérification.php' enctype = "multipart/form-data">
+            <div class="CV">
+                 <h2>CV</h2>
+                 <label ><strong>Ajouter un CV</strong> </label>
+                 <input type = "file" name = "CV"  />
+                 <br><br> 
+            </div>
+            
             <div class='EtatCivil'>
                <h2>Etat civil</h2>
                 
@@ -143,7 +150,7 @@ and open the template in the editor.
                     echo '</br></br><label ><strong>Identifiant : </strong> </label>';                    
                     echo "<input type='text' name='identifiant' value=$identifiant  readonly>";
                     echo '</br></br><label><strong>Mot de passe : </strong> </label>';
-                    echo "<input type='text' name='mdp' placeholder='18 rue Molière' value=$mdp>";
+                    echo "<input type='text' name='mdp' placeholder='mot de passe' value=$mdp>";
                     echo "</br><label for='idLine'>___________________________________________________________</label>";
                 ?> 
         

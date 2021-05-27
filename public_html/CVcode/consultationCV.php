@@ -14,7 +14,7 @@
         <nav>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/menu.php">Menu</a>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/contact.php">Contact</a>
-            <a class="nav" href="http://localhost/projetSite_HTML/public_html/consultationCommentaire_salarie.php">Commentaire</a>
+            <a class="nav" href="http://localhost/projetSite_HTML/public_html/consultationCommentaire.php">Commentaire</a>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionProfil.php">Gestion de profil</a>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionSalari%C3%A9.php">Gestion de salariés</a>
             <a class="nav" href="http://localhost/projetSite_HTML/public_html/gestionConges_salaries.php">Gestion de congé</a>
@@ -33,7 +33,7 @@
             if($resultat == false) echo "Echec de l'exécution de la requête";
             else {
                 while ( mysqli_stmt_fetch($resultat)){
-                    $nomVar = "../CV/".$CV;
+                    $nomVar = "../$CV";
                 }
             }
             mysqli_stmt_close($resultat);
@@ -42,16 +42,16 @@
             echo '<h1>Le CV de l\'employé n\'est pas posté</h1>';
         }
         else {
-            echo '<h1>CV de l\'employé numéro '.$id.'</h1>';
+            header("//localhost/projetSite_HTML/public_html/$CV");  
         }?>
 
             <iframe src="<?= $nomVar  ?>" width="100%" height="600px"></iframe>
       </body>
 
 
-    </nav>
+    
         </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-    </body>
+    
         </br></br><footer>
         <div class="footerinfo">
             <h5>À PROPOS DE L'ESME SUDRIA</h5>

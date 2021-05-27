@@ -34,15 +34,14 @@ if ($erreur!=""){
            mysqli_stmt_close($res);
            $adresse= explode(",", $adresse);
         }
-        $_FILES['image']['name']=$CV;
+        
 ?>
         
-        <form method='post' action='gestionSalarié_vérification.php'>
+        <form method='post' action='gestionSalarié_vérification.php' enctype = "multipart/form-data">
             <div class="CV">
                  <h2>CV</h2>
                  <label ><strong>Ajouter un CV</strong> </label>
-                 <input type = "file" name = "image" />
-                 <input type='text' value=<?php echo $CV; ?>>
+                 <input type = "file" name = "CV"  />
                  <br><br> 
             </div>
             

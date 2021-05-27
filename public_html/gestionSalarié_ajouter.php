@@ -31,7 +31,7 @@ if ($erreur!=""){
              <div class="CV">
                  <h2>CV</h2>
                  <label ><strong>Ajouter un CV</strong> </label>
-                 <input type = "file" name = "image" />
+                 <input type = "file" name = "CV" />
                  <br><br> 
             </div>
              

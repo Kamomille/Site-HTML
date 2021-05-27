@@ -1,18 +1,17 @@
 <?php
 session_start();
 include 'database.php';
-/*
-var_dump($_FILES);
-   if(isset($_FILES['image'])){
-       $file_name = $_FILES['image']['name'];
-       $file_size = $_FILES['image']['size'];
-       $file_tmp = $_FILES['image']['tmp_name'];
-       $file_type = $_FILES['image']['type'];
-       $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
-       $path = "CV/".$file_name;
-       move_uploaded_file($file_tmp,$path);
-   }
-*/
+
+
+$CV="";
+if(isset($_FILES['CV'])){
+    $file_name = $_FILES['CV']['name'];
+    $file_tmp = $_FILES['CV']['tmp_name'];
+    $path = "CV/".$file_name;
+    move_uploaded_file($file_tmp,$path);
+    $CV=$path;
+}
+
 $erreur="";
 $check=false;
 $page=false;
@@ -92,22 +91,21 @@ else {
         $contrat=strval($_POST['contrat']);
         $identifiant=strval($_POST['identifiant']);
         $contratDuree_mois=intval($_POST['contratDuree_mois']);
-        //$CV=$file_name;
         
         if(isset($mdp))
         {
         $_SESSION['mdp']=$mdp;
         var_dump($mdp);
-        $req="UPDATE authentification SET identifiant=?,nom=?,prenom=?,nationalite=?,adresse=?,age=?,sexe=?,situationFamiliale=?,tel=?,contrat=?,contratDuree_mois=?,mdp=?  WHERE id=?;";
+        $req="UPDATE authentification SET identifiant=?,nom=?,prenom=?,nationalite=?,adresse=?,age=?,sexe=?,situationFamiliale=?,tel=?,contrat=?,contratDuree_mois=?,mdp=?, CV=?  WHERE id=?;";
         $res= mysqli_prepare($connect, $req);
-        $var= mysqli_stmt_bind_param($res,'sssssissssisi',$identifiant,$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$mdp,$id);
+        $var= mysqli_stmt_bind_param($res,'sssssissssisis',$identifiant,$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$mdp,$CV,$id);
         $var= mysqli_execute($res);
         mysqli_stmt_close($res);       
         }
         else {
-        $req="UPDATE authentification SET identifiant=?,nom=?,prenom=?,nationalite=?,adresse=?,age=?,sexe=?,situationFamiliale=?,tel=?,contrat=?,contratDuree_mois=?  WHERE id=?;";
+        $req="UPDATE authentification SET identifiant=?,nom=?,prenom=?,nationalite=?,adresse=?,age=?,sexe=?,situationFamiliale=?,tel=?,contrat=?,contratDuree_mois=?,CV=?  WHERE id=?;";
         $res= mysqli_prepare($connect, $req);
-        $var= mysqli_stmt_bind_param($res,'sssssissssii',$identifiant,$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$id);
+        $var= mysqli_stmt_bind_param($res,'sssssissssisi',$identifiant,$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$CV,$id);
         $var= mysqli_execute($res);
         mysqli_stmt_close($res);                
         }
@@ -140,7 +138,6 @@ else {
        $tel=$_POST['telephone'];
        $fonction=$_POST['fonction'];
        $contrat=$_POST['contrat'];
-       //$CV=$file_name;
        if($_POST["contrat"]=="CDD"){
            $contratDuree_mois=$_POST['contratDuree_mois'];
        }
@@ -148,9 +145,9 @@ else {
            $contratDuree_mois=null;
         }
        
-       $req="INSERT INTO authentification(identifiant,mdp,fonction,congesPayes,congesRTT,nom,prenom,nationalite,adresse,age,sexe,situationFamiliale,tel,contrat,contratDuree_mois) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+       $req="INSERT INTO authentification(identifiant,mdp,fonction,congesPayes,congesRTT,nom,prenom,nationalite,adresse,age,sexe,situationFamiliale,tel,contrat,contratDuree_mois,CV) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
        $res= mysqli_prepare($connect ,$req);
-       $var= mysqli_stmt_bind_param($res,'sssiissssissssi',$identifiant,$mdp,$fonction,intval($congesPayes),intval($RTT),$nom,$prenom,$nationalite,$adresse,intval($age),$sexe,$situationFamiliale,$tel,$contrat,intval($contratDuree_mois));
+       $var= mysqli_stmt_bind_param($res,'sssiissssissssis',$identifiant,$mdp,$fonction,intval($congesPayes),intval($RTT),$nom,$prenom,$nationalite,$adresse,intval($age),$sexe,$situationFamiliale,$tel,$contrat,intval($contratDuree_mois),$CV);
        $var= mysqli_execute($res);
        mysqli_stmt_close($res);
     }
