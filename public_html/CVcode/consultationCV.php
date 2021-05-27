@@ -42,10 +42,11 @@
             echo '<h1>Le CV de l\'employé n\'est pas posté</h1>';
         }
         else {
-            header("//localhost/projetSite_HTML/public_html/$CV");  
+            echo"<iframe src='$nomVar' width='100%' height='600px'></iframe>";
+            
         }?>
-
-            <iframe src="<?= $nomVar  ?>" width="100%" height="600px"></iframe>
+            
+            
       </body>
 
 
