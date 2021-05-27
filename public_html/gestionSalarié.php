@@ -78,6 +78,7 @@
             <tr>
                 <?php if ($_SESSION['role']=='directeur') echo '<th>Sélection</th>';?>
                 
+                <th>id</th>
                 <th>Adresse mail</th>
                 <th>Nom</th>
                 <th>Prénom</th>
@@ -103,7 +104,7 @@
                     if($_SESSION['role']=='directeur'){
                         echo "<td class='table'><input type='checkbox' name='$personne[0]' value='$personne[0]'</td>";
                     }
-                        for($i=1;$i<sizeof($personne);$i++){
+                        for($i=0;$i<sizeof($personne);$i++){
                             echo "<td>$personne[$i]</td>";
                         }
                         if ($_SESSION['role']=='directeur'){
