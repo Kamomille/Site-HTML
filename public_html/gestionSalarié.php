@@ -7,13 +7,17 @@
     if ($_POST!=NULL){
         
         foreach ($_POST as $key => $val){
+            
             if($val=='supprimer'){
+                echo"oui";
                 $check=true;
+                break;
             }
-            break;
+            
         }
         
         if ($check==true){
+            echo"oui";
             foreach ($_POST as $key => $val){
                 
                 $req="DELETE FROM commentaire WHERE (personne=? OR destinataire=?)";
