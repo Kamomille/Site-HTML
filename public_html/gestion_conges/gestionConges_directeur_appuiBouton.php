@@ -10,13 +10,13 @@ if (isset($_POST['ok'])){
 
 if($connect) {
     
-    $req = 'SELECT id FROM congé';
+    $req = 'SELECT id,personne FROM congé';
     $resultat = mysqli_query($connect, $req);
     if($resultat == false) echo "Echec de l'exécution de la requête";
    
     else{
         $compt = 0;
-        while($ligne = mysqli_fetch_row($resultat)){
+        while($ligne =mysqli_fetch_row($resultat)){
             $compt += 1;
             $numBouton_validé = "valider_" . "$compt";
             $numBouton_refuser = "refuser_" . "$compt";
@@ -52,7 +52,7 @@ if($connect) {
             // ------------------ Commenter --------------------------
             
             if (isset($_POST[$numBouton_commentaire])){
-                header("Location:http://localhost/projetSite_HTML/public_html/contact.php?obj");
+                header("Location:http://localhost/projetSite_HTML/public_html/contact.php?id='$ligne[1]'&obj");
                 break;
             }
         }
