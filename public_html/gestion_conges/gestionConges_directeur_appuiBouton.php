@@ -5,7 +5,7 @@ include '..\database.php';
         
 if (isset($_POST['ok'])){ 
     $date =$_POST['mois'];
-    header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php?date=$date");
+    header("Location:http://localhost/projetSite_HTML/public_html/gestion_conges/gestionConges_directeur.php?date=$date");
 }
 
 if($connect) {
@@ -31,9 +31,9 @@ if($connect) {
                 reperage($compt);
                 if (isset($_POST['mois'])){
                     $date =$_POST['mois'];
-                    header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php?date=$date");
+                    header("Location:http://localhost/projetSite_HTML/public_html/gestion_conges/gestionConges_directeur.php?date=$date");
                     }
-                else {header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php");}
+                else {header("Location:http://localhost/projetSite_HTML/public_html/gestion_conges/gestionConges_directeur.php");}
                 break;
             }
             
@@ -44,8 +44,8 @@ if($connect) {
                 $resultat = mysqli_query($connect, $req);
                 if (isset($_POST['mois'])){
                     $date =$_POST['mois'];
-                    header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php?date=$date");}
-                else {header("Location:http://localhost/projetSite_HTML/public_html/gestionConges_directeur.php");}
+                    header("Location:http://localhost/projetSite_HTML/public_html/gestion_conges/gestionConges_directeur.php?date=$date");}
+                else {header("Location:http://localhost/projetSite_HTML/public_html/gestion_conges/gestionConges_directeur.php");}
                 break;
             }
             
