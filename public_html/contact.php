@@ -53,7 +53,7 @@ if(isset($_GET['id'])) $idDest=$_GET['id'];
                 <br><br>
 
                 <label><strong>ID destiantaire</strong> </label>
-                <?php echo "<input type='text' value=$idDest name='destinataire' readonly ?>" ?>
+                <?php echo "<input type='text' value=$idDest name='destinataire' ?>" ?>
                 </br><label>___________________________________________________________</label>
 
 
