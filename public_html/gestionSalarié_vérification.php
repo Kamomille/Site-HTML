@@ -98,7 +98,7 @@ else {
         var_dump($mdp);
         $req="UPDATE authentification SET identifiant=?,nom=?,prenom=?,nationalite=?,adresse=?,age=?,sexe=?,situationFamiliale=?,tel=?,contrat=?,contratDuree_mois=?,mdp=?, CV=?  WHERE id=?;";
         $res= mysqli_prepare($connect, $req);
-        $var= mysqli_stmt_bind_param($res,'sssssissssisis',$identifiant,$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$mdp,$CV,$id);
+        $var= mysqli_stmt_bind_param($res,'sssssissssissi',$identifiant,$nom,$prenom,$nationalite,$adresse,$age,$sexe,$situationFamiliale,$tel,$contrat,$contratDuree_mois,$mdp,$CV,$id);
         $var= mysqli_execute($res);
         mysqli_stmt_close($res);       
         }
